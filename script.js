@@ -1,13 +1,28 @@
 const API_BASE = "https://qapi-xbw7.onrender.com/";
 let subject = "", chapter = "", topic = "", questions = [], currentQuestionIndex = 0, timer = 0, timerInterval;
 let questionProgress = [];
+let isManualScroll = false;
+let scrollTimeoutId = null;
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secondsRemaining = seconds % 60;
+    let timeString = "";
+    if (minutes > 0) {
+        timeString += minutes + "m ";
+    }
+    if (secondsRemaining > 0) {
+        timeString += secondsRemaining + "s";
+    }
+    return timeString;
+}
 
 function startTimer() {
     timer = 0;
     clearInterval(timerInterval);
     timerInterval = setInterval(() => {
         timer++;
-        $("#timer").text(timer);
+        $("#timer").text(formatTime(timer));
     }, 1000);
 }
 
@@ -80,11 +95,10 @@ function initQuestionProgress() {
 }
 
 function updateQuestionListUI() {
-    // Create a question list sidebar
     const questionList = $(`
-        <div id="question-list-container">
+        <div id="question-list-container" style="position: sticky; top: 0; padding: 10px; background-color: #f0f0f0; z-index: 1; display: flex; overflow-x: auto; white-space: nowrap;">
             ${questionProgress.map(q => `
-                <div class="question-list-item" data-index="${q.index}">
+                <div class="question-list-item" data-index="${q.index}" style="flex-shrink: 0; width: 30%; text-align: center; padding: 5px 0; display: flex; justify-content: center; align-items: center;">
                     Q${q.index + 1} 
                     ${q.answered ? (q.correct ? '✅' : '❌') : ''}
                 </div>
@@ -92,21 +106,53 @@ function updateQuestionListUI() {
         </div>
     `);
 
-    // Add click navigation to question list
     questionList.on('click', '.question-list-item', function() {
         const targetIndex = $(this).data('index');
         currentQuestionIndex = targetIndex;
         renderQuestion();
     });
 
-    // Replace or append the question list
     $("#question-list-container").remove();
     $(".app-container").prepend(questionList);
+    
+    const container = $("#question-list-container");
+    container.on('scroll', function() {
+        isManualScroll = true;
+        clearTimeout(scrollTimeoutId);
+        scrollTimeoutId = setTimeout(function() {
+            isManualScroll = false;
+        }, 500);
+    });
+
+    
+    // Center the current question
+    const currentQuestionItem = $(`.question-list-item[data-index="${currentQuestionIndex}"]`);
+    const itemWidth = currentQuestionItem.outerWidth();
+    const containerWidth = container.outerWidth();
+    const itemLeft = currentQuestionItem.position().left;
+    const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
+    container.scrollLeft(newScrollLeft);
+
+    // Adjust scroll position on container scroll
+    container.on('scroll', function() {
+        const currentScrollLeft = container.scrollLeft();
+        const currentQuestionItem = $(`.question-list-item[data-index="${currentQuestionIndex}"]`);
+        const itemLeft = currentQuestionItem.position().left;
+        const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
+        if (Math.abs(currentScrollLeft - newScrollLeft) > 10) {
+            container.scrollLeft(newScrollLeft);
+        }
+    });
+
+    // Add a timeout to ensure the container has finished rendering
+    setTimeout(function() {
+        container.scrollLeft(newScrollLeft);
+    }, 100);
 }
 
 function fetchQuestions() {
     $.get(`${API_BASE}${subject}/${chapter}/${topic}`, (data) => {
-        questions = data.questions;
+        questions = data.questions.reverse();
         currentQuestionIndex = 0;
         $("#total-questions").text(questions.length);
         $("#question-container").show();
@@ -127,7 +173,10 @@ function renderQuestion() {
     $("#paper-title").text(currentQuestion.paperTitle || "");
     
     $("#question").html(renderContent(q.content));
-    
+    $("#check-answer").prop("disabled", false); // Enable the check answer button
+    $(".option").removeClass("disabled"); // Remove the disabled class from the options
+    $("#integer-input").prop("disabled", false); // Enable the integer input field
+
     // Render based on question type
     if (currentQuestion.type === "mcq") {
         const options = q.options.map(opt => {
@@ -156,12 +205,22 @@ function renderQuestion() {
     
     // Manage navigation buttons
     $("#prev-question").prop('disabled', currentQuestionIndex === 0);
-    $("#next-question").prop('disabled', true);
+    $("#next-question").prop('disabled', false);
 
-    // Highlight current question in list
+    // Highlight current question in list and scroll to it
     $(".question-list-item").removeClass("active");
-    $(`.question-list-item[data-index="${currentQuestionIndex}"]`).addClass("active");
+    const currentQuestionItem = $(`.question-list-item[data-index="${currentQuestionIndex}"]`);
+    currentQuestionItem.addClass("active");
 
+    const container = $("#question-list-container");
+    if (!isManualScroll) {
+        const itemLeft = currentQuestionItem.offset().left - container.offset().left + container.scrollLeft();
+        const itemWidth = currentQuestionItem.outerWidth();
+        const containerWidth = container.outerWidth();
+        const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
+        container.stop().animate({ scrollLeft: newScrollLeft }, 500); // Scroll to the current question with animation
+    }
+    
     startTimer();
     renderMathJax();
 }
@@ -189,13 +248,18 @@ $(document).on("click", ".topic", function() {
 });
 
 $(document).on("click", ".option", function() {
-    $(".option").removeClass("selected");
-    $(this).addClass("selected");
-    $("#check-answer").show();
+    if (!$(this).hasClass("disabled")) {
+        $(".option").removeClass("selected");
+        $(this).addClass("selected");
+        $("#check-answer").show();
+    }
 });
 
 $("#check-answer").click(function() {
     stopTimer();
+    $(this).prop("disabled", true); // Disable the check answer button
+    $(".option").addClass("disabled"); // Add a disabled class to the options
+    $("#integer-input").prop("disabled", true); // Disable the integer input field
 
     const currentQuestion = questions[currentQuestionIndex];
     let isCorrect = false;
@@ -277,6 +341,8 @@ $("#next-question").click(function() {
     if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
         renderQuestion();
+        stopTimer();
+        startTimer();
     }
 });
 

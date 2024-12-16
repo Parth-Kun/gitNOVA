@@ -382,4 +382,35 @@ a {
     cursor: pointer; 
 }
 
+@media (max-width: 600px) {
+    #question-list-container {
+        position: sticky;
+        top: 0;
+        padding: 10px;
+        background-color: #f0f0f0;
+        z-index: 1;
+    }
 
+    .question-list-item {
+        width: 100%;
+        text-align: center;
+        padding: 5px 0;
+    }
+
+    #question-list-container::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-btn {
+    width: 45%;
+}
+
+.option.disabled {
+    pointer-events: none;
+}
