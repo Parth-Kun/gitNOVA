@@ -1,5 +1,6 @@
 const API_BASE = "https://qapi-xbw7.onrender.com/";
 let subject = "", chapter = "", topic = "", questions = [], currentQuestionIndex = 0, timer = 0, timerInterval;
+let questionProgress = [];
 
 function startTimer() {
     timer = 0;
@@ -23,8 +24,6 @@ function renderMathJax() {
 }
 
 function renderContent(html) {
-    //return html.replace(/\$\$(.*?)\$\$/g, '\\\[$1\\\]')
-               //.replace(/\$(.*?)\$/g, '\\\$$1\\\$');
     return html;
 }
 
@@ -70,12 +69,48 @@ function fetchTopics() {
     });
 }
 
+function initQuestionProgress() {
+    questionProgress = questions.map((q, index) => ({
+        index: index,
+        answered: false,
+        correct: null,
+        type: q.type
+    }));
+    updateQuestionListUI();
+}
+
+function updateQuestionListUI() {
+    // Create a question list sidebar
+    const questionList = $(`
+        <div id="question-list-container">
+            ${questionProgress.map(q => `
+                <div class="question-list-item" data-index="${q.index}">
+                    Q${q.index + 1} 
+                    ${q.answered ? (q.correct ? '✅' : '❌') : ''}
+                </div>
+            `).join('')}
+        </div>
+    `);
+
+    // Add click navigation to question list
+    questionList.on('click', '.question-list-item', function() {
+        const targetIndex = $(this).data('index');
+        currentQuestionIndex = targetIndex;
+        renderQuestion();
+    });
+
+    // Replace or append the question list
+    $("#question-list-container").remove();
+    $(".app-container").prepend(questionList);
+}
+
 function fetchQuestions() {
     $.get(`${API_BASE}${subject}/${chapter}/${topic}`, (data) => {
         questions = data.questions;
         currentQuestionIndex = 0;
         $("#total-questions").text(questions.length);
         $("#question-container").show();
+        initQuestionProgress();
         renderQuestion();
         $("#topic-container").hide();
     });
@@ -121,7 +156,11 @@ function renderQuestion() {
     
     // Manage navigation buttons
     $("#prev-question").prop('disabled', currentQuestionIndex === 0);
-    $("#next-question").prop('disabled', currentQuestionIndex === questions.length - 1);
+    $("#next-question").prop('disabled', true);
+
+    // Highlight current question in list
+    $(".question-list-item").removeClass("active");
+    $(`.question-list-item[data-index="${currentQuestionIndex}"]`).addClass("active");
 
     startTimer();
     renderMathJax();
@@ -130,17 +169,23 @@ function renderQuestion() {
 // Event Listeners
 $(document).on("click", ".subject", function() {
     subject = $(this).data("subject");
+    updateBreadcrumb();
     fetchChapters();
+    hideQuestionContainer();
 });
 
 $(document).on("click", ".chapter", function() {
     chapter = $(this).data("chapter");
+    updateBreadcrumb();
     fetchTopics();
+    hideQuestionContainer();
 });
 
 $(document).on("click", ".topic", function() {
     topic = $(this).data("topic");
+    updateBreadcrumb();
     fetchQuestions();
+    hideQuestionContainer();
 });
 
 $(document).on("click", ".option", function() {
@@ -153,6 +198,7 @@ $("#check-answer").click(function() {
     stopTimer();
 
     const currentQuestion = questions[currentQuestionIndex];
+    let isCorrect = false;
     
     if (currentQuestion.type === "mcq") {
         const selected = $(".option.selected").data("identifier");
@@ -165,7 +211,8 @@ $("#check-answer").click(function() {
             }
         });
 
-        if (correctOptions.includes(selected)) {
+        isCorrect = correctOptions.includes(selected);
+        if (isCorrect) {
             $(".option.selected").addClass("correct");
             $("#explanation").html(`
                 <div class="success">
@@ -186,7 +233,9 @@ $("#check-answer").click(function() {
         const userAnswer = $("#integer-input").val();
         const correctAnswer = currentQuestion.question.answer;
         
-        if (userAnswer === correctAnswer.toString()) {
+        isCorrect = userAnswer === correctAnswer.toString();
+        
+        if (isCorrect) {
             $("#explanation").html(`
                 <div class="success">
                     <strong>Correct!</strong><br>
@@ -202,6 +251,17 @@ $("#check-answer").click(function() {
             `);
         }
     }
+
+    // Update question progress
+    questionProgress[currentQuestionIndex].answered = true;
+    questionProgress[currentQuestionIndex].correct = isCorrect;
+    updateQuestionListUI();
+
+    // Always enable next button after checking
+    $("#next-question").prop('disabled', false);
+    
+    // Hide check answer button after first use
+    $(this).hide();
     
     renderMathJax();
 });
@@ -231,54 +291,22 @@ $("#back-to-chapters").click(function() {
     $("#chapter-container").show();
 });
 
-$(document).ready(() => {
-    fetchAndRenderSubjects();
-});
-
 function updateBreadcrumb() {
     $("#breadcrumb-subject").text(subject).toggle(Boolean(subject));
     $("#breadcrumb-chapter").text(chapter.replace(/-/g, ' ')).toggle(Boolean(chapter));
     $("#breadcrumb-topic").text(topic.replace(/-/g, ' ')).toggle(Boolean(topic));
 }
 
-
-
-// Handle the click events for subject, chapter, and topic links
-$(document).on("click", ".subject", function () {
-    subject = $(this).data("subject");
-    updateBreadcrumb();
-    fetchChapters();
-    hideQuestionContainer();  // Ensure question view is hidden
-    $("#subject-container").show();
-});
-
-$(document).on("click", ".chapter", function () {
-    chapter = $(this).data("chapter");
-    updateBreadcrumb();
-    fetchTopics();
-    hideQuestionContainer();  // Ensure question view is hidden
-    $("#chapter-container").show();
-});
-
-$(document).on("click", ".topic", function () {
-    topic = $(this).data("topic");
-    updateBreadcrumb();
-    fetchQuestions();
-    hideQuestionContainer();  // Ensure question view is hidden
-    $("#topic-container").show();
-});
-
-// Function to hide the question container
 function hideQuestionContainer() {
     $("#question-container").hide();
 }
 
-// Optional: Handle breadcrumb navigation for back buttons
+// Breadcrumb navigation
 $("#breadcrumb-subject").click(function () {
     chapter = "";
     topic = "";
     updateBreadcrumb();
-    hideQuestionContainer();  // Ensure question view is hidden
+    hideQuestionContainer();
     $("#chapter-container").hide();
     $("#topic-container").hide();
     $("#subject-container").show();
@@ -287,14 +315,22 @@ $("#breadcrumb-subject").click(function () {
 $("#breadcrumb-chapter").click(function () {
     topic = "";
     updateBreadcrumb();
-    hideQuestionContainer();  // Ensure question view is hidden
+    hideQuestionContainer();
     $("#topic-container").hide();
     $("#chapter-container").show();
 });
 
-// Optional: Handle topic breadcrumb
 $("#breadcrumb-topic").click(function () {
     updateBreadcrumb();
-    hideQuestionContainer();  // Ensure question view is hidden
-    $("#question-container").show();  // If you want to show the question view for this breadcrumb
+    hideQuestionContainer();
+    $("#question-container").show();
 });
+
+$(document).ready(() => {
+    fetchAndRenderSubjects();
+});
+
+function hideQuestionContainer() {
+    $("#question-container").hide();
+    $("#question-list-container").remove(); // Add this line
+}
