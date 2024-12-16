@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novatra App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\$$', '\$$']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="app-container">
+<img src="https://fakeimg.pl/350x50/?text=Welcome&font=Inter"><br>
+        <nav id="breadcrumb" class="breadcrumb">
+            <span id="breadcrumb-subject" class="breadcrumb-item">Start</span>
+            <span id="breadcrumb-chapter" class="breadcrumb-item">Solving</span>
+            <span id="breadcrumb-topic" class="breadcrumb-item">Now!</span>
+        </nav>
+        
+        <main>
+          
+            <section id="subject-container" class="selection-container">
+              <h1>🔥 JEE Mains PYQs <i>TOPIC-WISE</i></h1><h4>
+                🎉 With Novatra's Topicwise Previous Year Questions (PYQs) you can practice <em><u> efficiently</u></em> and boost your preparation with carefully curated questions from all key topics. </h4><br>
+                <h2>✨ Select a Subject</h2>
+                <div id="subjects" class="grid-buttons"></div><br>
+            </section>
+
+            <section id="chapter-container" class="selection-container" style="display:none;">
+                <h2>✨ Select a Chapter</h2>
+                <div id="chapters" class="grid-buttons"></div>
+                <button id="back-to-subjects" class="back-btn">Back to Subjects</button>
+            </section>
+
+            <section id="topic-container" class="selection-container" style="display:none;">
+                <h2>✨ Select a Topic</h2>
+                <div id="topics" class="grid-buttons"></div>
+                <button id="back-to-chapters" class="back-btn">Back to Chapters</button>
+            </section>
+
+            <section id="question-container" style="display:none;">
+                <div id="paper-title-container">
+    <p id="paper-title"></p>
+</div>
+                <div class="question-header"><div class="timer-container">
+    <div class="timer">⏳ Time: <span id="timer">0</span>s</div>
+    <div class="progress">
+        <span id="current-question">1</span>/<span id="total-questions">0</span>
+    </div>
+</div>
+
+                    
+                </div>
+
+                <div id="question" class="question"></div>
+                <div id="options" class="options"></div>
+                <div id="integer-input-container">
+    <input type="number" id="integer-input" style="display:none;">
+</div>
+
+                <div class="question-actions">
+                    <button id="check-answer" style="display:none;">Check Answer</button>
+                    <div id="explanation" class="feedback"></div>
+                </div>
+
+              <div class="navigation-buttons">
+    <button id="prev-question" class="nav-btn">
+        Back
+    </button>
+    <button id="next-question" class="nav-btn">
+        Next
+    </button>
+</div>
+
+            </section>
+        </main>
+        <footer>
+            <p>© 2024 <a href="https://novatra.in">Novatra</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

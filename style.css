@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter",Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    font-size: 16px;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.selection-container {
+    margin-bottom: 20px;
+}
+
+.grid-buttons {
+    display: grid;
+    justify-items: start; 
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+button {
+    background-color: #f9f9f9;
+    color: #333;
+    border: 1px solid #a0a0a0;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+.back-btn {
+    margin-top: 15px;
+    display: block;
+    width: auto;
+}
+
+.question-header {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+}
+
+.question {
+    margin-bottom: 15px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.option {
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: left;
+    font-size: 1em;
+}
+
+.option.selected {
+    border-color: #a1a1a9;
+    background-color: #e0e0e0;
+}
+
+.option.correct {
+    background-color: #d4edda;
+    color: #115721;
+    border-color: #195729;
+}
+
+.option.incorrect {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #721c29;
+}
+
+#integer-input-container {
+    margin-bottom: 15px;
+}
+
+#integer-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #333;
+}
+
+.question-actions {
+    margin-top: 15px;
+}
+
+#explanation {
+    margin-top: 15px;
+    padding: 10px;
+    
+    background-color: #f9f9f9;
+}
+
+.navigation-buttons {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.nav-btn {
+    width: auto;
+}
+
+.btn-icon {
+    margin: 0 5px;
+}
+
+.success {
+    color: #202020;
+}
+
+.error {
+    color: #202020;
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    color: #666;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#paper-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: gray;
+}
+
+/* Ensure MathJax renders inline */
+.MathJax {
+    display: inline !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .app-container {
+        padding: 10px;
+    }
+
+    .grid-buttons {
+        justify-items: start; 
+        grid-template-columns: 1fr;
+    }
+}
+
+.breadcrumb {
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.breadcrumb-item {
+    color: #333;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.breadcrumb-item:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "/ ";
+    color: #666;
+}
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+/* Style for subject, chapter, and topic names with title case */
+.subject, .chapter, .topic {
+    font-weight: bold;          /* Make the text bold */
+    font-size: 1.1em;           /* Larger font size */
+    text-align: left;           /* Left alignment */
+    display: block;             /* Ensures each item appears on a new line */
+    margin-bottom: 10px;        /* Space between items */
+    padding-left: 20px;         /* Padding from the left */
+    text-transform: capitalize; /* Capitalize the first letter of each word */
+}
+
+/* Optional: Style the buttons within these categories for better spacing and visibility */
+.subject button, .chapter button, .topic button {
+    width: 100%;                /* Ensure buttons take up the full width */
+    padding: 10px 15px;         /* Add padding for better clickability */
+    margin: 5px 0;              /* Space between buttons */
+    background-color: #f0f0f0;  /* Light background color */
+    border: 1px solid #ccc;     /* Border for the buttons */
+    cursor: pointer;           /* Pointer cursor on hover */
+}
+
+.subject button:hover, .chapter button:hover, .topic button:hover {
+    background-color: #e0e0e0;  /* Change background color on hover */
+}
+
+.subject button:focus, .chapter button:focus, .topic button:focus {
+    outline: none;              /* Remove the outline for better design */
+    border-color: #007bff;      /* Border color on focus */
+}
+
+/* Main container for timer and question info */
+.timer-container {
+    display: flex;               /* Use flexbox layout */
+    justify-content: space-between; /* Space out the timer and progress */
+    align-items: center;         /* Vertically center-align the items */
+    padding: 5px 20px;          /* Padding for spacing */
+}
+
+/* Style for the timer */
+.timer {
+    font-weight: bold;
+    font-size: 0.9em;
+    text-align: right;           /* Ensure the timer is aligned to the right */
+}
+
+/* Style for the progress (question index) */
+.progress {
+    font-size: 0.9em;
+    font-weight: normal;
+    text-align: left;            /* Ensure question index is left-aligned */
+}
+
+#timer {
+    color: #333; /* Timer color */
+}
+
+#current-question, #total-questions {
+    color: #007bff; /* Color for the question numbers */
+}
+
+/* Navigation container */
+.navigation-buttons {
+    display: flex;                /* Use flexbox layout */
+    justify-content: space-between; /* Space out the previous and next buttons */
+    padding: 10px 20px;            /* Padding for spacing */
+}
+
+/* Style for the navigation buttons */
+.nav-btn {
+    font-size: 1.7em;
+    padding: 5px 10px;
+    background-color: #d0d0d0;
+    color: gray;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;                /* Flex for icon and text */
+    align-items: center;          /* Vertically align the icon and text */
+    gap: 10px;                    /* Space between the icon and the text */
+}
+
+/* Style for the icons */
+.btn-icon {
+    font-size: 1.4em;             /* Make the icons a bit larger */
+}
+a {
+    color: #007bf1;
+    text-decoration: none;
+}
