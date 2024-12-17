@@ -121,7 +121,9 @@ button:hover {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #333;
+    border: 1px solid #607D8B;
+    border-radius: 10px;
+    background: #CFD8DC;
 }
 
 .question-actions {
@@ -138,6 +140,7 @@ button:hover {
 .navigation-buttons {
     margin-top: 20px;
     width: 100%;
+    align-content: center;
 }
 
 .nav-btn {
@@ -414,3 +417,4 @@ a {
 .option.disabled {
     pointer-events: none;
 }
+

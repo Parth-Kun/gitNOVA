@@ -131,7 +131,7 @@ function updateQuestionListUI() {
     const containerWidth = container.outerWidth();
     const itemLeft = currentQuestionItem.position().left;
     const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
-    container.scrollLeft(newScrollLeft);
+    //container.scrollLeft(newScrollLeft);
 
     // Adjust scroll position on container scroll
     container.on('scroll', function() {
@@ -140,13 +140,13 @@ function updateQuestionListUI() {
         const itemLeft = currentQuestionItem.position().left;
         const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
         if (Math.abs(currentScrollLeft - newScrollLeft) > 10) {
-            container.scrollLeft(newScrollLeft);
+            //container.scrollLeft(newScrollLeft);
         }
     });
 
     // Add a timeout to ensure the container has finished rendering
     setTimeout(function() {
-        container.scrollLeft(newScrollLeft);
+        //container.scrollLeft(newScrollLeft);
     }, 100);
 }
 
@@ -255,7 +255,7 @@ $(document).on("click", ".option", function() {
     }
 });
 
-$("#check-answer").click(function() {
+$("#check-answer").click(function () {
     stopTimer();
     $(this).prop("disabled", true); // Disable the check answer button
     $(".option").addClass("disabled"); // Add a disabled class to the options
@@ -264,11 +264,15 @@ $("#check-answer").click(function() {
     const currentQuestion = questions[currentQuestionIndex];
     let isCorrect = false;
     
+    // Add audio elements for correct and wrong answers
+    const correctSound = new Audio('correct.mp3');
+    const wrongSound = new Audio('wrong.mp3');
+
     if (currentQuestion.type === "mcq") {
         const selected = $(".option.selected").data("identifier");
         const correctOptions = currentQuestion.question.correct_options;
         
-        $(".option").each(function() {
+        $(".option").each(function () {
             const optIdentifier = $(this).data("identifier");
             if (correctOptions.includes(optIdentifier)) {
                 $(this).addClass("correct");
@@ -277,6 +281,7 @@ $("#check-answer").click(function() {
 
         isCorrect = correctOptions.includes(selected);
         if (isCorrect) {
+            correctSound.play(); // Play correct sound
             $(".option.selected").addClass("correct");
             $("#explanation").html(`
                 <div class="success">
@@ -285,6 +290,7 @@ $("#check-answer").click(function() {
                 </div>
             `);
         } else {
+            wrongSound.play(); // Play wrong sound
             $(".option.selected").addClass("incorrect");
             $("#explanation").html(`
                 <div class="error">
@@ -300,6 +306,7 @@ $("#check-answer").click(function() {
         isCorrect = userAnswer === correctAnswer.toString();
         
         if (isCorrect) {
+            correctSound.play(); // Play correct sound
             $("#explanation").html(`
                 <div class="success">
                     <strong>Correct!</strong><br>
@@ -307,6 +314,7 @@ $("#check-answer").click(function() {
                 </div>
             `);
         } else {
+            wrongSound.play(); // Play wrong sound
             $("#explanation").html(`
                 <div class="error">
                     <strong>Incorrect!</strong> The correct answer is ${correctAnswer}<br>
@@ -329,6 +337,7 @@ $("#check-answer").click(function() {
     
     renderMathJax();
 });
+
 
 $("#prev-question").click(function() {
     if (currentQuestionIndex > 0) {
