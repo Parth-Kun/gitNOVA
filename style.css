@@ -298,9 +298,11 @@ img {
     border: 2px solid #90A4AE;
     border-radius: 8px;
     cursor: pointer;
-    display: flex;                /* Flex for icon and text */
+    display: flex;                /* Flex for alignment */
     align-items: center;          /* Vertically align the icon and text */
+    justify-content: center;      /* Horizontally center the text */
     gap: 10px;                    /* Space between the icon and the text */
+    text-align: center;           /* Ensures text alignment */
 }
 
 /* Style for the icons */
