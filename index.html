@@ -36,7 +36,7 @@
 </head>
 <body>
     <div class="app-container">
-<a href="https://discord.gg/BWKgvAZFyJ" id="banner"><img id="banner" src="banner/discord.svg"></a><br>
+<a href="https://discord.gg/BWKgvAZFyJ" id="banner-link"><img id="banner-img" src="banner/discord.svg"></a><br>
         <nav id="breadcrumb" class="breadcrumb">
             <span id="breadcrumb-subject" class="breadcrumb-item">Breadcrumbs</span>
             <span id="breadcrumb-chapter" class="breadcrumb-item">for</span>
@@ -152,6 +152,29 @@
             document.body.innerHTML = '';
         }
     }, 1000);
+
+
+    const images = [
+        { src: 'banner/discord.svg', link: 'https://discord.gg/BWKgvAZFyJ' },
+        { src: 'banner/amine.svg', link: 'https://datavorous.github.io/amine/' }
+    ];
+
+    let currentIndex = 0; // Start with the first image (Discord)
+
+    function switchBanner() {
+        currentIndex = (currentIndex + 1) % images.length; // Switch between 0 and 1
+
+        // Get the banner elements
+        const bannerImg = document.getElementById('banner-img');
+        const bannerLink = document.getElementById('banner-link');
+
+        // Update the image source and link href
+        bannerImg.src = images[currentIndex].src;
+        bannerLink.href = images[currentIndex].link;
+    }
+
+    // Call the switchBanner function every 3 seconds
+    setInterval(switchBanner, 6000);
 </script>
 </body>
 </html>
