@@ -417,4 +417,55 @@ a {
 .option.disabled {
     pointer-events: none;
 }
+/* Linear Question List for Big Screens */
+@media (min-width: 1024px) {
+    #question-list-container {
+        display: flex; /* Flex layout for linear appearance */
+        flex-direction: row; /* Make it horizontal */
+        justify-content: flex-start; /* Align items to the start */
+        align-items: center; /* Center items vertically */
+        overflow-x: auto; /* Add horizontal scrolling if needed */
+        height: auto; /* Reset any previous fixed height */
+        position: relative; /* Prevent overlap with other elements */
+        top: 0; /* Remove fixed positioning */
+        left: 0;
+        width: 100%; /* Full width */
+        padding: 10px 20px; /* Add horizontal padding */
+        background-color: #f8f9fa; /* Slight background for visibility */
+    }
+
+    .question-list-item {
+        margin: 0 10px; /* Space between list items */
+        min-width: 120px; /* Set consistent item width */
+        padding: 8px 12px;
+        font-size: 1.1em;
+        white-space: nowrap; /* Prevent wrapping */
+    }
+
+    .question-list-item.active {
+        background-color: #9FA8DA;
+        color: #303F9F;
+        font-weight: bold;
+    }
+}
+
+/* Reduce Banner Image Height */
+img.banner {
+    height: 200px; /* Reduce height for the banner image */
+    object-fit: cover; /* Ensure the image maintains proportions */
+    width: 100%; /* Full width */
+    border-radius: 8px; /* Optional: rounded corners */
+}
+
+@media (min-width: 1440px) {
+    img.banner {
+        height: 180px; /* Further reduce banner height on larger screens */
+    }
+}
+
+@media (min-width: 1920px) {
+    img.banner {
+        height: 160px; /* Smallest banner height for ultra-wide screens */
+    }
+}
 
