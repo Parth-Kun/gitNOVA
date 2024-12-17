@@ -669,7 +669,7 @@ img.banner {
         color: white !important;
         background: var(--dark-bg-primary) !important;
     }
-    img:not(#banner) {
+    img:not(#banner-img) {
     filter: invert(100%) contrast(1000%) brightness(150%);     /* Intense color saturation */
     opacity: 1;
 
@@ -677,9 +677,10 @@ img.banner {
     #timer, #total-questions, #paper-title, #current-question {
         color: var(--dark-text-primary) !important;
     }
-    a:not(#banner) {
+    a:not(#banner-link) {
         color: #4dff58; 
         border-bottom: 1px dotted #4dff58;
         text-decoration: none;
     }
 }
+
