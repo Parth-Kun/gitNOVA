@@ -3,6 +3,11 @@ let subject = "", chapter = "", topic = "", questions = [], currentQuestionIndex
 let questionProgress = [];
 let isManualScroll = false;
 let scrollTimeoutId = null;
+let isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+
+// Breadcrumb update at starting
+updateBreadcrumb();
+setInitialTheme();
 
 function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -96,26 +101,26 @@ function initQuestionProgress() {
 
 function updateQuestionListUI() {
     const questionList = $(`
-        <div id="question-list-container" style="position: sticky; top: 0; padding: 10px; background-color: #f0f0f0; z-index: 1; display: flex; overflow-x: auto; white-space: nowrap;">
+        <div id="question-list-container">
             ${questionProgress.map(q => `
-                <div class="question-list-item" data-index="${q.index}" style="flex-shrink: 0; width: 30%; text-align: center; padding: 5px 0; display: flex; justify-content: center; align-items: center;">
+                <div class="question-item ${q.answered ? (q.correct ? 'correct-item' : 'incorrect-item') : ''}" data-index="${q.index}">
                     Q${q.index + 1} 
-                    ${q.answered ? (q.correct ? '✅' : '❌') : ''}
+                    ${q.answered ? (q.correct ? '<i class="fas fa-check"></i>' : '<i class="fas fa-times"></i>') : ''}
                 </div>
             `).join('')}
         </div>
     `);
 
-    questionList.on('click', '.question-list-item', function() {
+    questionList.on('click', '.question-item', function() {
         const targetIndex = $(this).data('index');
         currentQuestionIndex = targetIndex;
         renderQuestion();
     });
 
     $("#question-list-container").remove();
-    $(".app-container").prepend(questionList);
+    $("#question-sidebar").html(questionList);
     
-    const container = $("#question-list-container");
+    const container = $("#question-sidebar");
     container.on('scroll', function() {
         isManualScroll = true;
         clearTimeout(scrollTimeoutId);
@@ -123,30 +128,27 @@ function updateQuestionListUI() {
             isManualScroll = false;
         }, 500);
     });
-
     
     // Center the current question
-    const currentQuestionItem = $(`.question-list-item[data-index="${currentQuestionIndex}"]`);
-    const itemWidth = currentQuestionItem.outerWidth();
-    const containerWidth = container.outerWidth();
-    const itemLeft = currentQuestionItem.position().left;
-    const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
-    //container.scrollLeft(newScrollLeft);
+    const currentQuestionItem = $(`.question-item[data-index="${currentQuestionIndex}"]`);
+    const itemHeight = currentQuestionItem.outerHeight();
+    const containerHeight = container.outerHeight();
+    const itemTop = currentQuestionItem.position().top;
+    const newScrollTop = itemTop - (containerHeight - itemHeight) / 2;
 
     // Adjust scroll position on container scroll
     container.on('scroll', function() {
-        const currentScrollLeft = container.scrollLeft();
-        const currentQuestionItem = $(`.question-list-item[data-index="${currentQuestionIndex}"]`);
-        const itemLeft = currentQuestionItem.position().left;
-        const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
-        if (Math.abs(currentScrollLeft - newScrollLeft) > 10) {
-            //container.scrollLeft(newScrollLeft);
+        const currentScrollTop = container.scrollTop();
+        const currentQuestionItem = $(`.question-item[data-index="${currentQuestionIndex}"]`);
+        const itemTop = currentQuestionItem.position().top;
+        const newScrollTop = itemTop - (containerHeight - itemHeight) / 2;
+        if (Math.abs(currentScrollTop - newScrollTop) > 10) {
+           
         }
     });
 
-    // Add a timeout to ensure the container has finished rendering
+     // Add a timeout to ensure the container has finished rendering
     setTimeout(function() {
-        //container.scrollLeft(newScrollLeft);
     }, 100);
 }
 
@@ -154,11 +156,13 @@ function fetchQuestions() {
     $.get(`${API_BASE}${subject}/${chapter}/${topic}`, (data) => {
         questions = data.questions.reverse();
         currentQuestionIndex = 0;
-        $("#total-questions").text(questions.length);
+        $("#total-questions-number").text(questions.length);
         $("#question-container").show();
         initQuestionProgress();
         renderQuestion();
         $("#topic-container").hide();
+         $("#question-sidebar").show();
+        
     });
 }
 
@@ -169,13 +173,13 @@ function renderQuestion() {
     const q = currentQuestion.question;
     
     // Update question number and paper title
-    $("#current-question").text(currentQuestionIndex + 1);
+    $("#current-question-number").text(currentQuestionIndex + 1);
     $("#paper-title").text(currentQuestion.paperTitle || "");
     
-    $("#question").html(renderContent(q.content));
-    $("#check-answer").prop("disabled", false); // Enable the check answer button
-    $(".option").removeClass("disabled"); // Remove the disabled class from the options
-    $("#integer-input").prop("disabled", false); // Enable the integer input field
+    $("#question-content").html(renderContent(q.content));
+    $("#submit-answer-button").prop("disabled", false);
+    $(".option").removeClass("disabled");
+    $("#answer-input-field").prop("disabled", false);
 
     // Render based on question type
     if (currentQuestion.type === "mcq") {
@@ -187,12 +191,12 @@ function renderQuestion() {
                 </button>
             `;
         }).join("");
-        $("#options").html(options);
-        $("#integer-input").hide();
-        $("#options").show();
+        $("#answer-options").html(options);
+        $("#answer-input-field").hide();
+        $("#answer-options").show();
     } else if (currentQuestion.type === "integer") {
-        $("#options").hide();
-        $("#integer-input")
+        $("#answer-options").hide();
+        $("#answer-input-field")
             .show()
             .val("")  // Clear previous input
             .attr('type', 'number');
@@ -201,26 +205,26 @@ function renderQuestion() {
     // Reset previous states
     $(".option").removeClass("selected correct incorrect");
     $("#explanation").html("");
-    $("#check-answer").show();
+    $("#submit-answer-button").show();
     
     // Manage navigation buttons
-    $("#prev-question").prop('disabled', currentQuestionIndex === 0);
-    $("#next-question").prop('disabled', false);
+    $("#previous-question-button").prop('disabled', currentQuestionIndex === 0);
+    $("#next-question-button").prop('disabled', false);
 
     // Highlight current question in list and scroll to it
-    $(".question-list-item").removeClass("active");
-    const currentQuestionItem = $(`.question-list-item[data-index="${currentQuestionIndex}"]`);
+    $(".question-item").removeClass("active");
+    const currentQuestionItem = $(`.question-item[data-index="${currentQuestionIndex}"]`);
     currentQuestionItem.addClass("active");
 
-    const container = $("#question-list-container");
+    const container = $("#question-sidebar");
     if (!isManualScroll) {
-        const itemLeft = currentQuestionItem.offset().left - container.offset().left + container.scrollLeft();
-        const itemWidth = currentQuestionItem.outerWidth();
-        const containerWidth = container.outerWidth();
-        const newScrollLeft = itemLeft - (containerWidth - itemWidth) / 2;
-        container.stop().animate({ scrollLeft: newScrollLeft }, 500); // Scroll to the current question with animation
+        const itemTop = currentQuestionItem.offset().top - container.offset().top + container.scrollTop();
+        const itemHeight = currentQuestionItem.outerHeight();
+        const containerHeight = container.outerHeight();
+        const newScrollTop = itemTop - (containerHeight - itemHeight) / 2;
+         container.stop().animate({ scrollTop: newScrollTop }, 500);
     }
-    
+
     startTimer();
     renderMathJax();
 }
@@ -228,16 +232,21 @@ function renderQuestion() {
 // Event Listeners
 $(document).on("click", ".subject", function() {
     subject = $(this).data("subject");
+    chapter = "";
+     topic = "";
     updateBreadcrumb();
     fetchChapters();
     hideQuestionContainer();
+     
 });
 
 $(document).on("click", ".chapter", function() {
     chapter = $(this).data("chapter");
+    topic = "";
     updateBreadcrumb();
     fetchTopics();
     hideQuestionContainer();
+    
 });
 
 $(document).on("click", ".topic", function() {
@@ -251,15 +260,15 @@ $(document).on("click", ".option", function() {
     if (!$(this).hasClass("disabled")) {
         $(".option").removeClass("selected");
         $(this).addClass("selected");
-        $("#check-answer").show();
+        $("#submit-answer-button").show();
     }
 });
 
-$("#check-answer").click(function () {
+$("#submit-answer-button").click(function () {
     stopTimer();
-    $(this).prop("disabled", true); // Disable the check answer button
-    $(".option").addClass("disabled"); // Add a disabled class to the options
-    $("#integer-input").prop("disabled", true); // Disable the integer input field
+    $(this).prop("disabled", true); 
+    $(".option").addClass("disabled");
+    $("#answer-input-field").prop("disabled", true);
 
     const currentQuestion = questions[currentQuestionIndex];
     let isCorrect = false;
@@ -281,8 +290,8 @@ $("#check-answer").click(function () {
 
         isCorrect = correctOptions.includes(selected);
         if (isCorrect) {
-            correctSound.play(); // Play correct sound
-            $(".option.selected").addClass("correct");
+            correctSound.play();
+             $(".option.selected").addClass("correct");
             $("#explanation").html(`
                 <div class="success">
                     <strong>Correct!</strong><br>
@@ -290,7 +299,7 @@ $("#check-answer").click(function () {
                 </div>
             `);
         } else {
-            wrongSound.play(); // Play wrong sound
+            wrongSound.play();
             $(".option.selected").addClass("incorrect");
             $("#explanation").html(`
                 <div class="error">
@@ -300,13 +309,13 @@ $("#check-answer").click(function () {
             `);
         }
     } else if (currentQuestion.type === "integer") {
-        const userAnswer = $("#integer-input").val();
+        const userAnswer = $("#answer-input-field").val();
         const correctAnswer = currentQuestion.question.answer;
         
         isCorrect = userAnswer === correctAnswer.toString();
         
         if (isCorrect) {
-            correctSound.play(); // Play correct sound
+             correctSound.play();
             $("#explanation").html(`
                 <div class="success">
                     <strong>Correct!</strong><br>
@@ -314,7 +323,7 @@ $("#check-answer").click(function () {
                 </div>
             `);
         } else {
-            wrongSound.play(); // Play wrong sound
+            wrongSound.play();
             $("#explanation").html(`
                 <div class="error">
                     <strong>Incorrect!</strong> The correct answer is ${correctAnswer}<br>
@@ -330,7 +339,7 @@ $("#check-answer").click(function () {
     updateQuestionListUI();
 
     // Always enable next button after checking
-    $("#next-question").prop('disabled', false);
+    $("#next-question-button").prop('disabled', false);
     
     // Hide check answer button after first use
     $(this).hide();
@@ -338,20 +347,19 @@ $("#check-answer").click(function () {
     renderMathJax();
 });
 
-
-$("#prev-question").click(function() {
+$("#previous-question-button").click(function() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
         renderQuestion();
     }
 });
 
-$("#next-question").click(function() {
+$("#next-question-button").click(function() {
     if (currentQuestionIndex < questions.length - 1) {
         currentQuestionIndex++;
         renderQuestion();
-        stopTimer();
-        startTimer();
+         stopTimer();
+         startTimer();
     }
 });
 
@@ -359,11 +367,13 @@ $("#next-question").click(function() {
 $("#back-to-subjects").click(function() {
     $("#chapter-container").hide();
     $("#subject-container").show();
+     
 });
 
 $("#back-to-chapters").click(function() {
     $("#topic-container").hide();
     $("#chapter-container").show();
+    
 });
 
 function updateBreadcrumb() {
@@ -374,25 +384,38 @@ function updateBreadcrumb() {
 
 function hideQuestionContainer() {
     $("#question-container").hide();
+    $("#question-sidebar").hide();
 }
 
 // Breadcrumb navigation
+$("#breadcrumb-home").click(function () {
+    subject = "";
+    chapter = "";
+    topic = "";
+     updateBreadcrumb();
+    hideQuestionContainer();
+     $("#chapter-container").hide();
+    $("#topic-container").hide();
+     $("#subject-container").show();
+     
+});
+
 $("#breadcrumb-subject").click(function () {
     chapter = "";
     topic = "";
     updateBreadcrumb();
     hideQuestionContainer();
-    $("#chapter-container").hide();
     $("#topic-container").hide();
-    $("#subject-container").show();
+    $("#chapter-container").show();
+    
 });
 
 $("#breadcrumb-chapter").click(function () {
     topic = "";
     updateBreadcrumb();
     hideQuestionContainer();
-    $("#topic-container").hide();
-    $("#chapter-container").show();
+    $("#topic-container").show();
+    
 });
 
 $("#breadcrumb-topic").click(function () {
@@ -403,9 +426,41 @@ $("#breadcrumb-topic").click(function () {
 
 $(document).ready(() => {
     fetchAndRenderSubjects();
+    setInitialTheme();
 });
 
 function hideQuestionContainer() {
-    $("#question-container").hide();
-    $("#question-list-container").remove(); // Add this line
+     $("#question-container").hide();
+     $("#question-sidebar").hide();
+}
+
+// Dark Mode Toggle
+document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+    const body = document.body;
+    const toggle = document.getElementById('dark-mode-toggle');
+    
+    isDarkMode = !isDarkMode;
+    
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+        toggle.innerHTML = '<i class="fas fa-sun"></i>';
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        body.classList.remove('dark-mode');
+        toggle.innerHTML = '<i class="fas fa-moon"></i>';
+        localStorage.setItem('darkMode', 'disabled');
+    }
+});
+
+function setInitialTheme() {
+    const body = document.body;
+    const toggle = document.getElementById('dark-mode-toggle');
+
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+        toggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        body.classList.remove('dark-mode');
+         toggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
 }

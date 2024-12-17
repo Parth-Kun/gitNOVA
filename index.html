@@ -2,29 +2,25 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-69DBFS52QC"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-69DBFS52QC"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-69DBFS52QC");
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-69DBFS52QC');
     </script>
-
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novatra App</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
     <script>
         MathJax = {
             tex: {
-                inlineMath: [['$', '$'], ['\$$', '\$$']],
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
                 displayMath: [['$$', '$$'], ['\\[', '\\]']]
             },
             svg: {
@@ -36,71 +32,75 @@
 </head>
 <body>
     <div class="app-container">
-<a href="https://discord.gg/BWKgvAZFyJ"><img src="banner/discord.svg"></a><br>
-        <nav id="breadcrumb" class="breadcrumb">
-            <span id="breadcrumb-subject" class="breadcrumb-item">Breadcrumbs</span>
-            <span id="breadcrumb-chapter" class="breadcrumb-item">for</span>
-            <span id="breadcrumb-topic" class="breadcrumb-item">Navigation!</span>
-        </nav>
-        
+        <header class="page-header">
+            <div class="header-content">
+                <!-- <img src="https://novatra.in/static/imgs/favicon.6c914da7a5d3.ico" alt="Novatra Logo" class="novatra-logo"> -->
+                <h1 id="page-title">JEE Mains PYQs</h1>
+            </div>
+            <button id="dark-mode-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </header>
+        <div class="navigation">
+            <nav id="breadcrumb" class="breadcrumb">
+                <span id="breadcrumb-home" class="breadcrumb-item"><i class="fas fa-home"></i></span>
+                <span id="breadcrumb-subject" class="breadcrumb-item">Breadcrumbs</span>
+                <span id="breadcrumb-chapter" class="breadcrumb-item">for</span>
+                <span id="breadcrumb-topic" class="breadcrumb-item">Navigation!</span>
+            </nav>
+        </div>
         <main>
-          
-            <section id="subject-container" class="selection-container">
-              <h1>🔥 JEE Mains PYQs <i>TOPIC-WISE</i></h1><h4>
-                🎉 With Novatra's Topicwise Previous Year Questions (PYQs) you can practice <em><u> efficiently</u></em> and <em><u>boost</u></em> your preparation with carefully curated questions from all key topics. </h4><br>
-                <h2>✨ Select a Subject</h2>
-                <div id="subjects" class="grid-buttons"></div><br>
-            </section>
-
-            <section id="chapter-container" class="selection-container" style="display:none;">
-                <h2>✨ Select a Chapter</h2>
-                <div id="chapters" class="grid-buttons"></div>
-                <button id="back-to-subjects" class="back-btn">Back to Subjects</button>
-            </section>
-
-            <section id="topic-container" class="selection-container" style="display:none;">
-                <h2>✨ Select a Topic</h2>
-                <div id="topics" class="grid-buttons"></div>
-                <button id="back-to-chapters" class="back-btn">Back to Chapters</button>
-            </section>
-
-            <section id="question-container" style="display:none;">
-                <div id="paper-title-container">
-    <p id="paper-title"></p>
-</div>
-                <div class="question-header"><div class="timer-container">
-    <div class="timer">⏳ Time: <span id="timer">0</span></div>
-    <div class="progress">
-        <span id="current-question">1</span>/<span id="total-questions">0</span>
-    </div>
-</div>
-
-                    
+            <aside id="question-sidebar" style="display:none;">
+                <div id="question-list-container">
                 </div>
-
-                <div id="question" class="question"></div>
-                <div id="options" class="options"></div>
-                <div id="integer-input-container">
-    <input type="number" id="integer-input" style="display:none;">
-</div>
-
-                <div class="question-actions">
-                    <center><button id="check-answer" style="display:none;">Check Answer</button></center>
-                    <div id="explanation" class="feedback"></div>
-                </div>
-
-              <div class="navigation-buttons">
-    <button id="prev-question" class="nav-btn">
-        <b>Previous</b>
-    </button>
-    <button id="next-question" class="nav-btn">
-        <b>Next</b>
-    </button>
-</div>
-
-            </section>
+            </aside>
+            <div class="content-area">
+                <section id="subject-container" class="selection-container card">
+                    <a href="https://discord.gg/BWKgvAZFyJ" class="discord-banner"><center><img src="banner/discord.svg" alt="Discord Banner"></center></a>
+                    <h2 class="section-title">🔥 JEE Mains PYQs <span class="topic-tag">TOPIC-WISE</span></h2>
+                    <p class="section-description">🎉 With Novatra's Topicwise Previous Year Questions (PYQs) you can practice <em><u> efficiently</u></em> and <em><u>boost</u></em> your preparation with carefully curated questions from all key topics.</p>
+                    <h3 class="selection-header">✨ Select a Subject</h3>
+                    <div id="subjects" class="grid-buttons"></div>
+                </section>
+                <section id="chapter-container" class="selection-container card" style="display:none;">
+                    <h3 class="selection-header">✨ Select a Chapter</h3>
+                    <div id="chapters" class="grid-buttons"></div>
+                    <button id="back-to-subjects" class="back-button"><i class="fas fa-arrow-left"></i> Back to Subjects</button>
+                </section>
+                <section id="topic-container" class="selection-container card" style="display:none;">
+                    <h3 class="selection-header">✨ Select a Topic</h3>
+                    <div id="topics" class="grid-buttons"></div>
+                    <button id="back-to-chapters" class="back-button"><i class="fas fa-arrow-left"></i> Back to Chapters</button>
+                </section>
+                <section id="question-container" style="display:none;">
+                    <div id="paper-title-container">
+                        <p id="paper-title"></p>
+                    </div>
+                    <div class="question-header card">
+                        <div class="timer-container">
+                            <div class="timer">⏳ Time: <span id="timer">0</span></div>
+                            <div class="progress">
+                                <span id="current-question-number">1</span>/<span id="total-questions-number">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question card">
+                        <div id="question-content" class="question-content"></div>
+                        <div id="answer-options" class="answer-options"></div>
+                        <div id="integer-input-container">
+                             <input type="number" id="answer-input-field" style="display:none;">
+                        </div>
+                        <div class="question-actions">
+                            <center><button id="submit-answer-button" style="display:none;">Check Answer</button></center>
+                            <div id="explanation" class="feedback"></div>
+                        </div>
+                    </div>
+                    <div class="navigation-buttons">
+                        <button id="previous-question-button" class="nav-button"><i class="fas fa-arrow-left"></i> Previous</button>
+                        <button id="next-question-button" class="nav-button">Next <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </section>
+            </div>
         </main>
-        <footer>
+        <footer class="page-footer">
             <p>© 2024 <a href="https://novatra.in">Novatra</a></p>
             <p>
                 Like our content? <a href="https://rzp.io/rzp/novatra" target="_blank">Support Us</a>
@@ -110,25 +110,31 @@
             </p>
         </footer>
     </div>
-
     <script src="script.js"></script>
     <script>
     // Preventing right-click
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
-        alert('Right-click is disabled.');
-    });
+       alert('Right-click is disabled.');
+     });
+
+    // Preventing iframe injection
+    // Check if the page is being loaded in an iframe
+     if (window.top !== window.self) {
+        // Redirect to the top-level window
+        window.top.location = window.self.location;
+    }
 
     // Preventing F12 and Ctrl+Shift+I
     document.addEventListener('keydown', function (e) {
-        if (
-            e.key === 'F12' || 
-            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
-            (e.ctrlKey && e.key === 'U')
-        ) {
+      if (
+            e.key === 'F12' ||
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+           (e.ctrlKey && e.key === 'U')
+       ) {
             e.preventDefault();
-            alert('DevTools shortcuts are disabled.');
-        }
+           alert('DevTools shortcuts are disabled.');
+       }
     });
 
     // Detect DevTools by measuring screen resizing
@@ -136,10 +142,10 @@
         let element = new Image();
         Object.defineProperty(element, 'id', {
             get: function () {
-                alert('DevTools is open. Please close it to continue using this site.');
-                document.body.innerHTML = '';
-            }
-        });
+               alert('DevTools is open. Please close it to continue using this site.');
+               document.body.innerHTML = '';
+           }
+       });
         console.log(element);
     })();
 
@@ -154,6 +160,5 @@
         }
     }, 1000);
 </script>
-
 </body>
 </html>
