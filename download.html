@@ -1,70 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Download Novatra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Inter', sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-        p {
-            font-size: 1.4rem;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-        .download-btn {
-          font-size: 1rem;
-            padding: 12px 24px;
-            background-color: #4CAF50;
-            color: rgb(30,30,30);
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .download-btn:hover {
-            background-color: #388E3C;
-        }.donate-btn {
-            margin-top: 1rem;
-            font-size: 1rem;
-            padding: 12px 24px;
-            border: solid #4CAF50;
-            color: #4CAF50;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .donate-btn:hover {
-            border: none;
-            background-color: #388E3C;
-            color: #ffffff;
-        }
+      :root {
+        --bg-color: var(--dark-bg-primary);
+        --text-primary: var(--dark-text-primary);
+        --interactive-primary: var(--dark-interactive-primary);
+        --interactive-hover: var(--dark-interactive-hover);
+        --link-color: var(--dark-link-color);
+        --border-color: var(--dark-border-primary);
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-primary);
+        text-align: center;
+      }
+
+      .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .button-container {
+        display: flex;
+        gap: 10px;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-primary);
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+      }
+
+      button {
+        padding: 10px 15px;
+        color: var(--text-primary);
+        background-color: var(--bg-color);
+        border: 2px solid var(--interactive-primary);
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: var(--interactive-hover);
+      }
+
+      footer {
+        text-align: center;
+        padding: 10px 0;
+        color: var(--text-primary);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-top: auto;
+      }
+
+      footer p {
+        margin: 0;
+      }
     </style>
-</head>
-<body>
-    <div>
-        <h1>✨ Novatra </h1>
-        <p>
-          Android app bhi agya,<br>
-          40 number to ayenge aab?</p>
-        <a href="https://github.com/Novatra/assets/releases/download/webapp/novatra.apk" class="download-btn">APK</a>
-        <a href="https://novatra.github.io/assets" class="download-btn">Web</a>
+  </head>
+  <body>
+    <div class="content">
+      <h1>✨ Novatra</h1>
+      <p>Android app bhi agya,<br />40 number to ayenge aab?</p>
+      <div class="button-container">
+        <button
+          onclick="location.href='https://github.com/Novatra/assets/releases/download/webapp/novatra.apk'"
+        >
+          Download APK
+        </button>
+        <button onclick="location.href='https://novatra.github.io/assets'">
+          Open Web
+        </button>
+      </div>
     </div>
-</body>
-  </html>
+
+    <footer>
+      <p>© 2024 <a href="https://novatra.in">Novatra</a></p>
+      <p>
+        <a href="https://rzp.io/rzp/novatra" target="_blank">Support Us</a> |
+        <a href="feedback.html" target="_blank">Feedback</a>
+      </p>
+    </footer>
+  </body>
+</html>
