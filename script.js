@@ -61,7 +61,7 @@ function fetchAndRenderSubjects() {
   $('#subjects').html('');
   ['maths', 'physics', 'chemistry'].forEach(sub => {
     $('#subjects').append(`
-            <button class='btn btn-sm btn-primary capitalize subject' data-subject='${sub}'>
+            <button class='btn font-bold capitalize subject ' data-subject='${sub}'>
                 ${sub}
             </button>
         `);
@@ -74,7 +74,7 @@ function fetchChapters() {
     $('#chapters').html('');
     data.chapters.forEach(ch => {
       $('#chapters').append(`
-                 <button class='btn btn-sm btn-primary capitalize chapter' data-chapter='${ch}'>
+                 <button class='btn font-bold capitalize chapter ' data-chapter='${ch}'>
                     ${ch.replace(/-/g, ' ')}
                 </button>
             `);
@@ -89,7 +89,7 @@ function fetchTopics() {
     $('#topics').html('');
     data.topics.forEach(tp => {
       $('#topics').append(`
-                 <button class='btn btn-sm btn-primary capitalize topic' data-topic='${tp}'>
+                 <button class='btn font-bold capitalize topic ' data-topic='${tp}'>
                     ${tp.replace(/-/g, ' ')}
                 </button>
             `);
@@ -116,14 +116,14 @@ function updateQuestionListUI() {
             ${questionProgress
               .map(
                 q => `
-                 <div class="question-item btn btn-sm capitalize ${
+                 <div class="question-item btn font-bold  capitalize ${
                    q.answered
                      ? q.correct
                        ? 'btn-success text-white'
                        : 'btn-error text-white'
                      : 'btn-outline'
                  }" data-index="${q.index}">
-                    Q${q.index + 1} 
+                    Q${q.index + 1}
                     ${
                       q.answered
                         ? q.correct
@@ -216,7 +216,7 @@ function renderQuestion() {
       .map(opt => {
         const renderedContent = renderContent(opt.content);
         return `
-                <button class='btn btn-sm btn-primary option' data-identifier='${opt.identifier}'>
+                <button class='btn font-bold option' data-identifier='${opt.identifier}'>
                     ${renderedContent}
                 </button>
             `;
@@ -321,7 +321,7 @@ $('#submit-answer-button').click(function () {
     $('.option').each(function () {
       const optIdentifier = $(this).data('identifier');
       if (correctOptions.includes(optIdentifier)) {
-        $(this).addClass('correct');
+           $(this).addClass('correct');
       }
     });
 
@@ -329,7 +329,7 @@ $('#submit-answer-button').click(function () {
     if (isCorrect) {
       correctSound.play();
       $('.option.selected').addClass('correct');
-      $('#explanation').html(`
+     $('#explanation').html(`
                 <div class="card card-success">
                     <i class="fas fa-check mr-2"></i>
                     <strong>Correct!</strong><br>
@@ -340,7 +340,7 @@ $('#submit-answer-button').click(function () {
     } else {
       wrongSound.play();
       $('.option.selected').addClass('incorrect');
-      $('#explanation').html(`
+     $('#explanation').html(`
                 <div class="card card-error">
                      <i class="fas fa-times mr-2"></i>
                     <strong>Incorrect!</strong><br>
@@ -356,7 +356,7 @@ $('#submit-answer-button').click(function () {
 
     if (isCorrect) {
       correctSound.play();
-      $('#explanation').html(`
+     $('#explanation').html(`
                 <div class="card card-success">
                      <i class="fas fa-check mr-2"></i>
                     <strong>Correct!</strong><br>
@@ -490,11 +490,11 @@ document.getElementById('dark-mode-toggle').addEventListener('click', () => {
   isDarkMode = !isDarkMode;
 
   if (isDarkMode) {
-    html.setAttribute('data-theme', 'dark');
+    html.classList.add('dark');
     toggle.innerHTML = '<i class="fas fa-sun"></i>';
     localStorage.setItem('darkMode', 'enabled');
   } else {
-    html.setAttribute('data-theme', 'winter');
+      html.classList.remove('dark');
     toggle.innerHTML = '<i class="fas fa-moon"></i>';
     localStorage.setItem('darkMode', 'disabled');
   }
@@ -505,15 +505,15 @@ function setInitialTheme() {
   const html = document.querySelector('html');
 
   if (isDarkMode) {
-    html.setAttribute('data-theme', 'dark');
+    html.classList.add('dark');
     toggle.innerHTML = '<i class="fas fa-sun"></i>';
   } else {
-    html.setAttribute('data-theme', 'winter');
+    html.classList.remove('dark');
     toggle.innerHTML = '<i class="fas fa-moon"></i>';
   }
 }
 
 // Reset Quiz Button
-$('#reset-quiz-button').click(function () {
+$('#reset-quiz-Button').click(function () {
   fetchQuestions();
 });
