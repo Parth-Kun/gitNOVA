@@ -119,9 +119,9 @@ function updateQuestionListUI() {
                  <div class="question-item btn font-bold  capitalize ${
                    q.answered
                      ? q.correct
-                       ? 'btn-success text-white'
+                       ? 'btn-success text-white text'
                        : 'btn-error text-white'
-                     : 'btn-outline'
+                     : 'border-black text'
                  }" data-index="${q.index}">
                     Q${q.index + 1}
                     ${

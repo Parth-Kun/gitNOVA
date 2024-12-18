@@ -54,14 +54,14 @@
 }
 
 .option.correct {
-    color: rgb(255, 0, 0);
-    border-color: #ff0000;
+    color: #38a53d;
+    border-color: #38a53d;
     
 }
 
 .option.incorrect {
-    border-color: #00ff00;
-    color: rgb(0, 255, 0);
+    border-color: #b71c1c;
+    color: #b71c1c;
    
 }
 
