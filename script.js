@@ -524,7 +524,7 @@ document.getElementById('dark-mode-toggle').addEventListener('click', () => {
 
   if (isDarkMode) {
     html.classList.add('dark');
-    document.documentElement.setAttribute('data-theme', 'sunset');
+    document.documentElement.setAttribute('data-theme', 'dark');
     toggle.innerHTML = '<i class="fas fa-sun"></i>';
     localStorage.setItem('darkMode', 'enabled');
   } else {
@@ -541,7 +541,7 @@ function setInitialTheme() {
 
   if (isDarkMode) {
     html.classList.add('dark');
-    document.documentElement.setAttribute('data-theme', 'sunset');
+    document.documentElement.setAttribute('data-theme', 'dark');
     toggle.innerHTML = '<i class="fas fa-sun"></i>';
     localStorage.setItem('darkMode', 'enabled');
   } else {
