@@ -165,8 +165,12 @@
       overflow-x: hidden;
       border-left: 1px solid #e5e7eb; /* Added a left border so it shows up as a right sidebar*/
       margin-bottom: 0;
-      /* width: auto; */
+      width: 30vw;
       /* display: block !important; */
+    }
+
+    .content-area{
+      width: 65vw;
     }
   
     .app-container > main {
