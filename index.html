@@ -1,197 +1,373 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-
-<head>
+  <head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-69DBFS52QC"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-69DBFS52QC');
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-69DBFS52QC');
     </script>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Novatra App</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-     <script>
-        tailwind.config = {
-            darkMode: 'class',
-             theme: {
-                extend: {
-                     colors: {
-                        primary: {
-                             "50": "#edf2ff",
-                            "100": "#e1e7ff",
-                            "200": "#c9d4ff",
-                            "300": "#a9bbff",
-                             "400": "#839dfa",
-                            "500": "#6a7aea",
-                            "600": "#545bf4",
-                            "700": "#4649dd",
-                            "800": "#3a3cb3",
-                            "900": "#302e85",
-                            "950": "#201e5b",
-                         }
-                    },
-                }
-            }
-        }
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                '50': '#edf2ff',
+                '100': '#e1e7ff',
+                '200': '#c9d4ff',
+                '300': '#a9bbff',
+                '400': '#839dfa',
+                '500': '#6a7aea',
+                '600': '#545bf4',
+                '700': '#4649dd',
+                '800': '#3a3cb3',
+                '900': '#302e85',
+                '950': '#201e5b',
+              },
+            },
+          },
+        },
+      };
     </script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
     <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
+      MathJax = {
+        tex: {
+          inlineMath: [
+            ['$', '$'],
+            ['\\(', '\\)'],
+          ],
+          displayMath: [
+            ['$$', '$$'],
+            ['\\[', '\\]'],
+          ],
+        },
+        svg: {
+          fontCache: 'global',
+        },
+      };
     </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link href="style.css" rel="stylesheet">
-</head>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <link href="style.css" rel="stylesheet" />
+  </head>
 
-<body class="bg-base-200 text-base-content font-sans text-base leading-relaxed transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
-    <div class="app-container max-w-screen-lg mx-auto p-5 flex flex-col min-h-screen transition-colors duration-300">
-        <header
-            class="page-header flex justify-between items-center py-4 px-5 bg-primary-100 border-b-2 border-primary-400 rounded-xl shadow-md transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
-            <div class="header-content flex items-center gap-4">
-                <h1 id="page-title" class="text-2xl font-semibold text-primary-900 transition-colors duration-300 dark:text-gray-100">JEE Mains
-                    PYQs</h1>
-            </div>
-            <button id="dark-mode-toggle"
-                class="theme-toggle text-2xl cursor-pointer text-primary-900 transition-colors duration-300 dark:text-gray-100">
-                <i class="fas fa-moon"></i>
-            </button>
-        </header>
-        <div class="navigation py-4 pl-4">
-            <nav id="breadcrumb" class="breadcrumb flex items-center flex-wrap text-primary-500 dark:text-primary-400">
-                <span id="breadcrumb-home"
-                    class="breadcrumb-item cursor-pointer flex items-center text-primary-900 font-semibold transition-transform duration-200 mr-2 dark:text-gray-100"><i
-                        class="fas fa-home"></i></span>
-                <span id="breadcrumb-subject"
-                    class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100">Breadcrumbs</span>
-                <span id="breadcrumb-chapter"
-                    class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100">for</span>
-                <span id="breadcrumb-topic"
-                    class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100">Navigation!</span>
-            </nav>
+  <body
+    class="bg-base-200 text-base-content font-sans text-base leading-relaxed transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100"
+  >
+    <div
+      class="app-container max-w-screen-lg mx-auto p-5 flex flex-col min-h-screen transition-colors duration-300"
+    >
+      <header
+        class="page-header flex justify-between items-center py-4 px-5 bg-primary-100 border-b-2 border-primary-400 rounded-xl shadow-md transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
+      >
+        <div class="header-content flex items-center gap-4">
+          <h1
+            id="page-title"
+            class="text-2xl font-semibold text-primary-900 transition-colors duration-300 dark:text-gray-100"
+          >
+            JEE Mains PYQs
+          </h1>
         </div>
-        <main class="flex-grow flex flex-col gap-5 transition-colors duration-300">
-            <aside id="question-sidebar" style="display:none;"
-                class="w-full h-auto max-h-[150px] overflow-x-auto overflow-y-hidden border-b border-gray-300 shadow-sm mb-5 static dark:border-gray-700">
-                <div id="question-list-container" class="flex flex-nowrap">
+        <button
+          id="dark-mode-toggle"
+          class="theme-toggle text-2xl cursor-pointer text-primary-900 transition-colors duration-300 dark:text-gray-100"
+          aria-label="Toggle dark mode"
+        >
+          <i class="fas fa-moon"></i>
+        </button>
+      </header>
+      <div class="navigation py-4 pl-4">
+        <nav
+          id="breadcrumb"
+          class="breadcrumb flex items-center flex-wrap text-primary-500 dark:text-primary-400"
+          aria-label="breadcrumb"
+        >
+          <span
+            id="breadcrumb-home"
+            class="breadcrumb-item cursor-pointer flex items-center text-primary-900 font-semibold transition-transform duration-200 mr-2 dark:text-gray-100"
+            aria-label="Home"
+            ><i class="fas fa-home"></i
+          ></span>
+          <span
+            id="breadcrumb-subject"
+            class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100"
+            >Breadcrumbs</span
+          >
+          <span
+            id="breadcrumb-chapter"
+            class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100"
+            >for</span
+          >
+          <span
+            id="breadcrumb-topic"
+            class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100"
+            >Navigation!</span
+          >
+        </nav>
+      </div>
+      <main class="flex-grow flex flex-col gap-5 transition-colors duration-300">
+        <aside
+          id="question-sidebar"
+          style="display: none"
+          class="w-full h-auto max-h-[150px] overflow-x-auto overflow-y-hidden border-b border-gray-300 shadow-sm mb-5 static dark:border-gray-700"
+        >
+          <div id="question-list-container" class="flex flex-nowrap"></div>
+        </aside>
+        <div class="content-area flex-grow">
+          <section
+            id="subject-container"
+            class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
+          >
+            <h2
+              class="section-title text-3xl font-semibold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100"
+            >
+              JEE Mains PYQs
+              <span
+                class="topic-tag text-primary-500 ml-1 text-sm transition-colors duration-300 dark:text-primary-400"
+                >TOPIC-WISE</span
+              >
+            </h2>
+            <p
+              class="section-description text-gray-700 mb-6 font-semibold transition-colors duration-300 dark:text-gray-300"
+            >
+              With Novatra's Topicwise Previous Year Questions (PYQs) you can
+              practice
+              <em><u> efficiently</u></em> and <em><u>boost</u></em> your
+              preparation with carefully curated questions from all key topics.
+            </p>
+            <h3
+              class="selection-header text-xl font-bold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100"
+            >
+              Select a Subject
+            </h3>
+            <div
+              id="subjects"
+              class="grid-buttons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 transition-colors duration-300"
+            >
+              <!-- Physics Card -->
+              <div
+                class="subject-card bg-orange-200 text-gray-800 p-6 rounded-xl shadow-md transition-colors duration-300 flex items-center justify-between"
+              >
+                <div>
+                  <h4 class="text-xl font-bold mb-2">Physics <i class="fas fa-angle-right"></i></h4>
+                  <p class="text-sm">32 Chapters, 5042 Qs</p>
                 </div>
-            </aside>
-            <div class="content-area flex-grow">
-                <section id="subject-container"
-                    class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
-                    <h2 class="section-title text-3xl font-semibold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100">JEE
-                        Mains PYQs <span
-                            class="topic-tag text-primary-500 ml-1 text-sm transition-colors duration-300 dark:text-primary-400">TOPIC-WISE</span>
-                    </h2>
-                    <p class="section-description text-gray-700 mb-6 font-semibold transition-colors duration-300 dark:text-gray-300">With
-                        Novatra's Topicwise Previous Year Questions (PYQs) you can practice
-                        <em><u> efficiently</u></em> and <em><u>boost</u></em> your preparation with carefully curated
-                        questions
-                        from all key topics.</p>
-                    <h3 class="selection-header text-xl font-bold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100">
-                        Select
-                        a Subject</h3>
-                    <div id="subjects"
-                        class="grid-buttons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 transition-colors duration-300">
-                    </div>
-                </section>
-                <section id="chapter-container"
-                    class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
-                    style="display:none;">
-                    <h3 class="selection-header text-xl font-bold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100">
-                        Select
-                        a Chapter</h3>
-                    <div id="chapters"
-                        class="grid-buttons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 transition-colors duration-300">
-                    </div>
-                    <button id="back-to-subjects"
-                        class="back-button btn btn-ghost btn-sm mt-4  font-semibold text-primary-900  transition-colors duration-300 dark:text-gray-100"><i
-                            class="fas fa-arrow-left mr-1"></i> Back to Subjects</button>
-                </section>
-                <section id="topic-container"
-                    class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
-                    style="display:none;">
-                    <h3 class="selection-header text-xl font-bold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100">
-                        Select
-                        a Topic</h3>
-                    <div id="topics"
-                        class="grid-buttons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 transition-colors duration-300">
-                    </div>
-                    <button id="back-to-chapters"
-                        class="back-button btn btn-ghost btn-sm mt-4  font-semibold text-primary-900  transition-colors duration-300 dark:text-gray-100"><i
-                            class="fas fa-arrow-left mr-1"></i> Back to Chapters</button>
-                </section>
-                <section id="question-container" style="display:none;">
-                    <div id="paper-title-container">
-                        <p id="paper-title" class="font-semibold text-primary-500 mb-4 transition-colors duration-300 dark:text-primary-400"></p>
-                    </div>
-                    <div
-                        class="question-header card bg-base-100 p-5 rounded-xl shadow-md border border-gray-300 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
-                        <div class="timer-container flex justify-between items-center text-lg">
-                            <div class="timer font-semibold text-primary-600 transition-colors duration-300 dark:text-primary-400">Time: <span
-                                    id="timer">0</span></div>
-                            <div class="test-progress font-medium transition-colors duration-300 dark:text-gray-100">
-                                <span id="current-question-number">1</span>/<span id="total-questions-number">0</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="question card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mt-4 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
-                        <div id="question-content" class="question-content mb-5 transition-colors duration-300 dark:text-gray-100"></div>
-                        <div id="answer-options"
-                            class="answer-options grid grid-cols-1 gap-3 transition-colors duration-300"></div>
-                        <div id="integer-input-container" class="mb-4">
-                            <input type="number" id="answer-input-field"
-                                class="w-full px-4 py-3 border-2 border-primary-500 rounded-lg bg-primary-100 text-primary-900 transition-colors duration-300 dark:bg-gray-900 dark:border-primary-700 dark:text-gray-100"
-                                style="display:none;">
-                        </div>
-                        <div class="question-actions mt-5">
-                            <center><button id="submit-answer-button"
-                                    class="btn btn-sm font-semibold text-primary-900 border-primary-400  bg-primary-100  transition-colors duration-300 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800"
-                                    style="display:none;">Check Answer</button></center>
-                            <div id="explanation" class="feedback mt-4 rounded-lg transition-colors duration-300 dark:bg-gray-700 dark:text-gray-100"></div>
-                        </div>
-                    </div>
-                    <div class="navigation-buttons flex justify-between items-center mt-5">
-                        <button id="previous-question-button"
-                            class="nav-button btn btn-ghost  btn-md  font-semibold text-primary-900 border-primary-400 bg-primary-100  transition-colors duration-300 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800"><i
-                                class="fas fa-arrow-left mr-1"></i> Previous</button>
-                        <button id="next-question-button"
-                            class="nav-button btn btn-ghost btn-md font-semibold text-primary-900  border-primary-400  bg-primary-100 transition-colors duration-300 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800">Next
-                            <i class="fas fa-arrow-right ml-1"></i></button>
-                    </div>
-                </section>
+                <div class="icon-container p-3 bg-orange-400 rounded-full">
+                 <i class="fas fa-ruler text-white text-xl"></i>
+                </div>
+              </div>
+
+              <!-- Chemistry Card -->
+              <div
+                class="subject-card bg-green-200 text-gray-800 p-6 rounded-xl shadow-md transition-colors duration-300 flex items-center justify-between"
+              >
+                <div>
+                  <h4 class="text-xl font-bold mb-2">Chemistry <i class="fas fa-angle-right"></i></h4>
+                  <p class="text-sm">33 Chapters, 5030 Qs</p>
+                </div>
+                <div class="icon-container p-3 bg-green-400 rounded-full">
+                <i class="fas fa-flask text-white text-xl"></i>
+                </div>
+              </div>
+
+              <!-- Mathematics Card -->
+              <div
+                class="subject-card bg-blue-200 text-gray-800 p-6 rounded-xl shadow-md transition-colors duration-300 flex items-center justify-between"
+              >
+                <div>
+                  <h4 class="text-xl font-bold mb-2">Mathematics <i class="fas fa-angle-right"></i></h4>
+                  <p class="text-sm">36 Chapters, 5003 Qs</p>
+                </div>
+                <div class="icon-container p-3 bg-blue-400 rounded-full">
+                <i class="fas fa-calculator text-white text-xl"></i>
+                </div>
+              </div>
             </div>
-        </main>
-        <footer
-            class="page-footer text-center mt-10 pt-5 border-t border-gray-300 text-gray-600 transition-colors duration-300 dark:border-gray-700 dark:text-gray-400">
-            <p>© 2024 <a href="https://novatra.in"
-                    class="hover:text-primary-600 transition-colors duration-300 dark:hover:text-primary-400">Novatra</a></p>
-            <p>
-                Like our content? <a href="https://rzp.io/rzp/novatra" target="_blank"
-                    class="hover:text-primary-600 transition-colors duration-300 dark:hover:text-primary-400">Support Us</a>
-            </p>
-            <p>
-                Any <a href="feedback.html" target="_blank"
-                    class="hover:text-primary-600 transition-colors duration-300 dark:hover:text-primary-400">feedback or suggestions?</a><b></b>
-            </p>
-        </footer>
+          </section>
+          <section
+            id="chapter-container"
+            class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
+            style="display: none"
+          >
+            <h3
+              class="selection-header text-xl font-bold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100"
+            >
+              Select a Chapter
+            </h3>
+            <div
+              id="chapters"
+              class="grid-buttons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 transition-colors duration-300"
+            ></div>
+            <button
+              id="back-to-subjects"
+              class="back-button btn btn-ghost btn-sm mt-4 font-semibold text-primary-900 transition-colors duration-300 dark:text-gray-100"
+              aria-label="Back to subjects"
+              ><i class="fas fa-arrow-left mr-1"></i> Back to Subjects</button
+            >
+          </section>
+          <section
+            id="topic-container"
+            class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
+            style="display: none"
+          >
+            <h3
+              class="selection-header text-xl font-bold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100"
+            >
+              Select a Topic
+            </h3>
+            <div
+              id="topics"
+              class="grid-buttons grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 transition-colors duration-300"
+            ></div>
+            <button
+              id="back-to-chapters"
+              class="back-button btn btn-ghost btn-sm mt-4 font-semibold text-primary-900 transition-colors duration-300 dark:text-gray-100"
+              aria-label="Back to chapters"
+              ><i class="fas fa-arrow-left mr-1"></i> Back to Chapters</button
+            >
+          </section>
+          <section id="question-container" style="display: none">
+            <div id="paper-title-container">
+              <p
+                id="paper-title"
+                class="font-semibold text-primary-500 mb-4 transition-colors duration-300 dark:text-primary-400"
+              ></p>
+            </div>
+            <div
+              class="question-header card bg-base-100 p-5 rounded-xl shadow-md border border-gray-300 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
+            >
+              <div
+                class="timer-container flex justify-between items-center text-lg"
+              >
+                <div
+                  class="timer font-semibold text-primary-600 transition-colors duration-300 dark:text-primary-400"
+                >
+                  Time: <span id="timer">0</span>
+                </div>
+                <div
+                  class="test-progress font-medium transition-colors duration-300 dark:text-gray-100"
+                >
+                  <span id="current-question-number">1</span>/<span
+                    id="total-questions-number"
+                    >0</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              class="question card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mt-4 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700"
+            >
+              <div
+                id="question-content"
+                class="question-content mb-5 transition-colors duration-300 dark:text-gray-100"
+              ></div>
+              <div
+                id="answer-options"
+                class="answer-options grid grid-cols-1 gap-3 transition-colors duration-300"
+              ></div>
+              <div id="integer-input-container" class="mb-4">
+                <input
+                  type="number"
+                  id="answer-input-field"
+                  class="w-full px-4 py-3 border-2 border-primary-500 rounded-lg bg-primary-100 text-primary-900 transition-colors duration-300 dark:bg-gray-900 dark:border-primary-700 dark:text-gray-100"
+                  style="display: none"
+                  aria-label="Answer Input"
+                />
+              </div>
+              <div class="question-actions mt-5">
+                <center>
+                  <button
+                    id="submit-answer-button"
+                    class="btn btn-sm font-semibold text-primary-900 border-primary-400 bg-primary-100 transition-colors duration-300 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800"
+                    style="display: none"
+                    aria-label="Check Answer"
+                  >
+                    Check Answer
+                  </button>
+                </center>
+                <div
+                  id="explanation"
+                  class="feedback mt-4 rounded-lg transition-colors duration-300 dark:bg-gray-700 dark:text-gray-100"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="navigation-buttons flex justify-between items-center mt-5"
+            >
+              <button
+                id="previous-question-button"
+                class="nav-button btn btn-ghost btn-md font-semibold text-primary-900 border-primary-400 bg-primary-100 transition-colors duration-300 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800"
+                aria-label="Previous question"
+                ><i class="fas fa-arrow-left mr-1"></i> Previous</button
+              >
+              <button
+                id="next-question-button"
+                class="nav-button btn btn-ghost btn-md font-semibold text-primary-900 border-primary-400 bg-primary-100 transition-colors duration-300 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800"
+                aria-label="Next question"
+                >Next <i class="fas fa-arrow-right ml-1"></i></button
+              >
+            </div>
+          </section>
+        </div>
+      </main>
+      <footer
+        class="page-footer text-center mt-10 pt-5 border-t border-gray-300 text-gray-600 transition-colors duration-300 dark:border-gray-700 dark:text-gray-400"
+      >
+        <p>
+          © 2024
+          <a
+            href="https://novatra.in"
+            class="hover:text-primary-600 transition-colors duration-300 dark:hover:text-primary-400"
+            >Novatra</a
+          >
+        </p>
+        <p>
+          Like our content?
+          <a
+            href="https://rzp.io/rzp/novatra"
+            target="_blank"
+            class="hover:text-primary-600 transition-colors duration-300 dark:hover:text-primary-400"
+            >Support Us</a
+          >
+        </p>
+        <p>
+          Any
+          <a
+            href="feedback.html"
+            target="_blank"
+            class="hover:text-primary-600 transition-colors duration-300 dark:hover:text-primary-400"
+            >feedback or suggestions?</a
+          ><b></b>
+        </p>
+      </footer>
     </div>
     <script src="script.js"></script>
     <!-- <script>
@@ -243,6 +419,5 @@
         }
     }, 1000);
 </script> -->
-</body>
-
+  </body>
 </html>

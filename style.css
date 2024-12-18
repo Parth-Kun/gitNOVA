@@ -1,87 +1,83 @@
 /* General Styles */
 * {
     box-sizing: border-box;
-}
-
-/* Theme Toggle Styles */
-.theme-toggle {
+  }
+  
+  /* Theme Toggle Styles */
+  .theme-toggle {
     background: transparent;
     border: none;
     transition: color 0.3s ease;
     max-width: fit-content;
-}
-
-/* Breadcrumb Styles */
-.breadcrumb-item {
+  }
+  
+  /* Breadcrumb Styles */
+  .breadcrumb-item {
     font-weight: 500;
     cursor: pointer;
     text-transform: capitalize;
     transition: transform 0.2s ease;
-}
-
-.breadcrumb-item:hover {
-     transform: scale(1.05);
-}
-
-
-.breadcrumb-item + .breadcrumb-item::before {
-    content: "/ ";
+  }
+  
+  .breadcrumb-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '/ ';
     margin: 0 5px;
-}
-
-/* Question Container Styles */
-
-.question-content {
+  }
+  
+  /* Question Container Styles */
+  
+  .question-content {
     margin-bottom: 18px;
     transition: background-color 0.3s ease;
-}
-
-.answer-options {
+  }
+  
+  .answer-options {
     transition: background-color 0.3s ease;
-}
-
-.option {
+  }
+  
+  .option {
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
     text-align: left;
     font-size: 1.1em;
     border-radius: 10px;
-}
-
-.option.selected {
+  }
+  
+  .option.selected {
     border-color: #bb00ff;
     color: #bb00ff;
-}
-
-.option.correct {
+  }
+  
+  .option.correct {
     color: #38a53d;
     border-color: #38a53d;
-    
-}
-
-.option.incorrect {
+  }
+  
+  .option.incorrect {
     border-color: #b71c1c;
     color: #b71c1c;
-   
-}
-
-#integer-input-container {
+  }
+  
+  #integer-input-container {
     margin-bottom: 15px;
-}
-
-#answer-input-field {
-    
+  }
+  
+  #answer-input-field {
     margin: 10px 0;
     font-size: 1.1em;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.feedback {
+  }
+  .feedback {
     padding: 15px;
     border-radius: 10px;
-}
-
-/* Navigation Buttons */
-.nav-button {
+  }
+  
+  /* Navigation Buttons */
+  .nav-button {
     width: 45%;
     font-size: 1.2em;
     padding: 14px;
@@ -92,29 +88,28 @@
     justify-content: center;
     gap: 10px;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.nav-button i {
+  }
+  
+  .nav-button i {
     font-size: 1.1em;
-}
-
-.hidden {
+  }
+  
+  .hidden {
     display: none !important;
-}
-
-#paper-title {
+  }
+  
+  #paper-title {
     font-weight: 600;
     margin-bottom: 18px;
+  }
   
-}
-
-.MathJax {
+  .MathJax {
     display: inline !important;
-}
-
-/* Question List Sidebar */
-
-.question-item {
+  }
+  
+  /* Question List Sidebar */
+  
+  .question-item {
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
@@ -124,32 +119,86 @@
     min-width: 80px;
     white-space: nowrap;
     text-align: center;
-}
-
-.question-item.active {
+  }
+  
+  .question-item.active {
     color: #388e3c;
-}
-
-.question-item.correct-item {
+  }
+  
+  .question-item.correct-item {
     color: #1b5e20;
-}
-
-.question-item.incorrect-item {
+  }
+  
+  .question-item.incorrect-item {
     color: #b71c1c;
-}
-
-.question-item i {
+  }
+  
+  .question-item i {
     margin-left: 5px;
-}
-/* Timer and Progress */
-
-/* Submit Button */
-#submit-answer-button {
+  }
+  /* Timer and Progress */
+  
+  /* Submit Button */
+  #submit-answer-button {
     width: auto;
     font-size: 1.2em;
     font-weight: 600;
-   
+  
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
+  }
+  
+  /* PC specific Question List */
+  @media (min-width: 1024px) {
+    .app-container {
+      display: grid;
+      grid-template-columns: 4fr 1fr; /* Main content takes up 4/5 of the width and the sidebar takes up 1/5*/
+      gap: 20px;
+    }
+  
+    #question-sidebar {
+      position: sticky;
+      top: 1rem;
+      max-height: calc(100vh - 5rem);
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-left: 1px solid #e5e7eb; /* Added a left border so it shows up as a right sidebar*/
+      margin-bottom: 0;
+      /* width: auto; */
+      /* display: block !important; */
+    }
+  
+    .app-container > main {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+  
+    #question-list-container {
+      flex-wrap: wrap;
+    }
+  }
+  
+  .subject-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  
+  .subject-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .subject-card .icon-container {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+  }
