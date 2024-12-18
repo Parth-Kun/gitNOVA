@@ -491,10 +491,12 @@ document.getElementById('dark-mode-toggle').addEventListener('click', () => {
 
   if (isDarkMode) {
     html.classList.add('dark');
+    document.documentElement.setAttribute('data-theme', 'sunset');
     toggle.innerHTML = '<i class="fas fa-sun"></i>';
     localStorage.setItem('darkMode', 'enabled');
   } else {
       html.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
     toggle.innerHTML = '<i class="fas fa-moon"></i>';
     localStorage.setItem('darkMode', 'disabled');
   }
