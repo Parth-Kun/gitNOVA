@@ -13,24 +13,8 @@
 
   img, video {
     width: -webkit-fill-available;
+    width: -moz-available;
 }
-  
-  /* Breadcrumb Styles */
-  .breadcrumb-item {
-    font-weight: 500;
-    cursor: pointer;
-    text-transform: capitalize;
-    transition: transform 0.2s ease;
-  }
-  
-  .breadcrumb-item:hover {
-    transform: scale(1.05);
-  }
-  
-  .breadcrumb-item + .breadcrumb-item::before {
-    content: '> ';
-    margin: 0 5px;
-  }
   
   /* Question Container Styles */
   
@@ -78,24 +62,6 @@
   .feedback {
     padding: 15px;
     border-radius: 10px;
-  }
-  
-  /* Navigation Buttons */
-  .nav-button {
-    width: 45%;
-    font-size: 1.2em;
-    padding: 14px;
-    border-radius: 10px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .nav-button i {
-    font-size: 1.1em;
   }
   
   .hidden {
@@ -265,12 +231,12 @@ mjx-container mjx-math {
   background-image: linear-gradient(
     to right,
     #f6f7f8 0%,
-    #edeef1 20%,
+    #cfcece 20%,
     #f6f7f8 40%,
     #f6f7f8 100%
   );
-  background-repeat: no-repeat;
-  background-size: 800px 100%;
+  /* background-repeat: no-repeat;
+  background-size: 800px 100%; */
   animation: shimmer 1.5s infinite linear;
 }
 
@@ -309,4 +275,10 @@ mjx-container mjx-math {
     #2d3748 40%,
     #2d3748 100%
   );
+}
+
+.breadcrumbs>ol>li+:before, .breadcrumbs>ul>li+:before{
+  opacity: 1;
+  border-top: 3px solid;
+  border-right: 3px solid;
 }

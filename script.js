@@ -637,11 +637,26 @@ $('#back-to-chapters').click(function () {
 
 // Function to update the breadcrumb
 function updateBreadcrumb() {
-  $('#breadcrumb-subject').text(subject).toggle(Boolean(subject));
-  $('#breadcrumb-chapter')
-    .text(chapter.replace(/-/g, ' '))
-    .toggle(Boolean(chapter));
-  $('#breadcrumb-topic').text(topic.replace(/-/g, ' ')).toggle(Boolean(topic));
+  if (subject === '') {
+    $('#breadcrumb-subj').hide();
+  } else {
+    $('#breadcrumb-subj').show();
+    $('#breadcrumb-subject').text(subject.replace(/-/g, ' ')).toggle(Boolean(subject));
+  }
+
+  if (chapter === '') {
+    $('#breadcrumb-chap').hide();
+  } else {
+    $('#breadcrumb-chap').show();
+    $('#breadcrumb-chapter').text(chapter.replace(/-/g, ' ')).toggle(Boolean(chapter));
+  }
+
+  if (topic === '') {
+    $('#breadcrumb-topi').hide();
+  } else {
+    $('#breadcrumb-topi').show();
+    $('#breadcrumb-topic').text(topic.replace(/-/g, ' ')).toggle(Boolean(topic));
+  }
 }
 
 // Function to hide question container
@@ -652,49 +667,49 @@ function hideQuestionContainer() {
 
 // Breadcrumb navigation
 $('#breadcrumb-home').click(function () {
-    subject = '';
-    chapter = '';
-    topic = '';
-    currentQuestionIndex = 0;
-    updateURLParams({});
-    hideQuestionContainer();
-    $('#chapter-container').hide();
-    $('#topic-container').hide();
-    $('#subject-container').show();
+  subject = '';
+  chapter = '';
+  topic = '';
+  currentQuestionIndex = 0;
+  updateURLParams({});
+  hideQuestionContainer();
+  $('#chapter-container').hide();
+  $('#topic-container').hide();
+  $('#subject-container').show();
 });
 
 $('#breadcrumb-subject').click(function () {
-    chapter = '';
-    topic = '';
-    currentQuestionIndex = 0;
-    updateURLParams({ subject });
-    fetchChapters();
-    hideQuestionContainer();
-    $('#topic-container').hide();
-    $('#chapter-container').show();
+  chapter = '';
+  topic = '';
+  currentQuestionIndex = 0;
+  updateURLParams({ subject });
+  fetchChapters();
+  hideQuestionContainer();
+  $('#topic-container').hide();
+  $('#chapter-container').show();
 });
 
 $('#breadcrumb-chapter').click(function () {
-    topic = '';
-    currentQuestionIndex = 0;
-    fetchTopics();
-    updateURLParams({ subject, chapter });
-    hideQuestionContainer();
-    $('#topic-container').show();
+  topic = '';
+  currentQuestionIndex = 0;
+  fetchTopics();
+  updateURLParams({ subject, chapter });
+  hideQuestionContainer();
+  $('#topic-container').show();
 });
 
 $('#breadcrumb-topic').click(function () {
-    currentQuestionIndex = 0;
-    fetchQuestions();
-    updateURLParams({
-      subject,
-      chapter,
-      topic,
-      'question-number': currentQuestionIndex + 1,
-    });
-    hideQuestionContainer();
-    $('#question-container').show();
-    $('#question-sidebar').show();
+  currentQuestionIndex = 0;
+  fetchQuestions();
+  updateURLParams({
+  subject,
+  chapter,
+  topic,
+  'question-number': currentQuestionIndex + 1,
+  });
+  hideQuestionContainer();
+  $('#question-container').show();
+  $('#question-sidebar').show();
 });
 
 $(document).ready(() => {

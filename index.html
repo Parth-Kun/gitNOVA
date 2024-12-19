@@ -64,12 +64,6 @@
         },
       };
     </script>
-    <script type="text/x-mathjax-config">
-MathJax.Hub.Config({
- "HTML-CSS": { linebreaks: { automatic: true } },
-         SVG: { linebreaks: { automatic: true } }
-});
-</script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link href="style.css" rel="stylesheet" />
   </head>
@@ -84,21 +78,37 @@ MathJax.Hub.Config({
         </button>
       </header>
       <div class="navigation py-4 pl-4">
-        <nav id="breadcrumb" class="breadcrumb flex items-center flex-wrap text-primary-500 dark:text-primary-400" aria-label="breadcrumb">
-          <span id="breadcrumb-home" class="breadcrumb-item cursor-pointer flex items-center text-primary-900 font-semibold transition-transform duration-200 mr-2 dark:text-gray-100" aria-label="Home">
-            <i class="fas fa-home"></i>
-          </span>
-          <span id="breadcrumb-subject" class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100">Breadcrumbs</span>
-          <span id="breadcrumb-chapter" class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100">for</span>
-          <span id="breadcrumb-topic" class="breadcrumb-item capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 mr-2 dark:text-gray-100">Navigation!</span>
-        </nav>
+          <nav class="breadcrumbs text-primary-500 dark:text-primary-400" aria-label="breadcrumb">
+            <ul>
+              <li>
+                <a id="breadcrumb-home" class="cursor-pointer flex items-center text-primary-900 font-semibold transition-transform duration-200 dark:text-gray-100" aria-label="Home">
+                  <i class="fas fa-home mr-2"></i>
+                </a>
+              </li>
+              <li id="breadcrumb-subj" style="display: none">
+                  <a id="breadcrumb-subject" class="capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 dark:text-gray-100">
+                      Subject
+                  </a>
+              </li>
+              <li id="breadcrumb-chap" style="display: none">
+                  <a id="breadcrumb-chapter" class="capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 dark:text-gray-100">
+                    Chapter
+                  </a>
+              </li>
+              <li id="breadcrumb-topi" style="display: none">
+                  <a id="breadcrumb-topic" class="capitalize cursor-pointer flex items-center font-semibold text-primary-900 transition-transform duration-200 dark:text-gray-100">
+                    Topic
+                  </a>
+              </li>
+            </ul>
+          </nav>
       </div>
       <main class="flex-grow flex flex-col gap-5 transition-colors duration-300">
         <aside id="question-sidebar" style="display: none" class="w-full h-auto max-h-[150px] overflow-x-auto overflow-y-hidden border-b border-gray-300 shadow-sm mb-5 static dark:border-gray-700">
           <div id="question-list-container" class="flex flex-nowrap"></div>
         </aside>
         <div class="content-area flex-grow">
-          <section id="subject-container" class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
+          <section id="subject-container" style="display: none" class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
             <a href="https://discord.gg/BWKgvAZFyJ"><img src="https://raw.githubusercontent.com/KingNish24/assets/refs/heads/ui-enhancement/banner/discord.svg"></a><br>
             <h2 class="section-title text-3xl font-semibold text-primary-900 mb-5 transition-colors duration-300 dark:text-gray-100"> JEE Mains PYQs <span class="topic-tag text-primary-500 ml-1 text-sm transition-colors duration-300 dark:text-primary-400">TOPIC-WISE</span>
             </h2>
