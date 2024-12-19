@@ -10,6 +10,10 @@
     transition: color 0.3s ease;
     max-width: fit-content;
   }
+
+  img, video {
+    width: -webkit-fill-available;
+}
   
   /* Breadcrumb Styles */
   .breadcrumb-item {
@@ -24,7 +28,7 @@
   }
   
   .breadcrumb-item + .breadcrumb-item::before {
-    content: '/ ';
+    content: '> ';
     margin: 0 5px;
   }
   
@@ -135,6 +139,7 @@
   
   .question-item i {
     margin-left: 5px;
+    font-size: 18px;
   }
   /* Timer and Progress */
   

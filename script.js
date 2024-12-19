@@ -489,7 +489,7 @@ function fetchQuestions() {
   }
 
   $.get(`${API_BASE}${subject}/${chapter}/${topic}`, data => {
-    sessionCache[cacheKey] = data.questions;
+    sessionCache[cacheKey] = data.questions.reverse();
     questions = sessionCache[cacheKey];
     renderQuestions();
   });
