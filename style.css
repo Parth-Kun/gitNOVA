@@ -227,5 +227,5 @@
   font-size: 1.1em;
   border-radius: 10px;
   margin-bottom: 10px;
-  height: fit-content;
+  height: auto;
 }
