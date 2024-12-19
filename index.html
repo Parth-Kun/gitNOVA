@@ -1,201 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-69DBFS52QC"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-69DBFS52QC");
-    </script>
-    <meta name="description" content="Novatra Quiz is an online platform to practice topic-wise JEE Mains PYQs free of cost. Improve your JEE preparation with interactive exercises.">
-    <meta name="keywords" content="JEE Mains, JEE Preparation, Practice Questions, Novatra, Free JEE Platform, JEE Topics, Topic Wise JEE Mains PYQs">
-    <meta name="author" content="Novatra Team">
-    <meta property="og:title" content="Novatra Quiz - JEE Mains Practice Platform">
-    <meta property="og:description" content="Novatra offers free practice of JEE Mains topic-wise PYQs to boost your JEE preparation.">
-    <meta property="og:image" content="URL_of_image_for_thumbnail">
-    <meta property="og:url" content="https://novatra.github.io">
-    <meta name="twitter:title" content="Novatra Quiz App - JEE Mains Practice Platform">
-    <meta name="twitter:description" content="Novatra offers free practice of JEE Mains topic-wise PYQs to boost your JEE preparation.">
-    <meta name="twitter:image" content="URL_of_image_for_twitter_card">
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": "Novatra Quiz",
-      "url": "https://novatra.github.io",
-      "description": "Novatra Quiz is an online platform to practice topic-wise JEE Mains PYQs free of cost."
-    }
-    </script>
-
-    <link rel="icon" href="logo.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novatra App</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjs@11.8.0/lib/browser/math.min.js"></script>
-    <script>
-        MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\$$', '\$$']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']]
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+    <title>Novatra - Maintenance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <div class="app-container">
-<a href="https://discord.gg/BWKgvAZFyJ" id="banner-link"><img id="banner-img" src="banner/discord.svg"></a><br>
-        <nav id="breadcrumb" class="breadcrumb">
-            <span id="breadcrumb-subject" class="breadcrumb-item">Breadcrumbs</span>
-            <span id="breadcrumb-chapter" class="breadcrumb-item">for</span>
-            <span id="breadcrumb-topic" class="breadcrumb-item">Navigation!</span>
-        </nav>
-        
-        <main>
-          
-            <section id="subject-container" class="selection-container">
-              <h1>🔥 JEE Mains PYQs <i>TOPIC-WISE</i></h1><h4>
-                🎉 With Novatra's Topicwise Previous Year Questions (PYQs) you can practice <em><u> efficiently</u></em> and <em><u>boost</u></em> your preparation with carefully curated questions from all key topics. </h4><br>
-                <h2>✨ Select a Subject</h2>
-                <div id="subjects" class="grid-buttons"></div><br>
-            </section>
-
-            <section id="chapter-container" class="selection-container" style="display:none;">
-                <h2>✨ Select a Chapter</h2>
-                <div id="chapters" class="grid-buttons"></div>
-                <button id="back-to-subjects" class="back-btn">Back to Subjects</button>
-            </section>
-
-            <section id="topic-container" class="selection-container" style="display:none;">
-                <h2>✨ Select a Topic</h2>
-                <div id="topics" class="grid-buttons"></div>
-                <button id="back-to-chapters" class="back-btn">Back to Chapters</button>
-            </section>
-
-            <section id="question-container" style="display:none;">
-                <div id="paper-title-container">
-    <p id="paper-title"></p>
-</div>
-                <div class="question-header"><div class="timer-container">
-    <div class="timer">⏳ Time: <span id="timer">0</span></div>
-    <div class="progress">
-        <span id="current-question">1</span>/<span id="total-questions">0</span>
+<body class="bg-green-50 flex items-center justify-center min-h-screen">
+    <div class="card w-full max-w-md shadow-xl bg-white">
+        <div class="card-body">
+            <h1 class="text-4xl font-bold text-green-600 mb-4">We'll Be Back Soon!</h1>
+            <p class="text-gray-700 mb-4">Our website is currently undergoing scheduled maintenance.</p>
+            <div class="flex justify-center mb-6">
+                <div class="w-12 h-12 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+            <p class="text-gray-600 mb-4">We apologize for any inconvenience. Please check back later.</p>
+            <div class="mt-4">
+                <p class="text-gray-600">If you have any urgent queries, feel free to <a href="mailto:support@novatra.com" class="text-green-500 hover:underline">contact us</a>.</p>
+            </div>
+        </div>
     </div>
-</div>
-
-                    
-                </div>
-
-                <div id="question" class="question"></div>
-                <div id="options" class="options"></div>
-                <div id="integer-input-container">
-    <input type="number" id="integer-input" style="display:none;">
-</div>
-
-                <div class="question-actions">
-                    <center><button id="check-answer" style="display:none;">Check Answer</button></center>
-                    <div id="explanation" class="feedback"></div>
-                </div>
-
-              <div class="navigation-buttons">
-    <button id="prev-question" class="nav-btn">
-        <b>Previous</b>
-    </button>
-    <button id="next-question" class="nav-btn">
-        <b>Next</b>
-    </button>
-</div>
-
-            </section>
-        </main>
-        <footer>
-            <p>© 2024 <a href="https://novatra.in">Novatra</a></p>
-            <p>
-                <a href="https://rzp.io/rzp/novatra" target="_blank">Support Us</a> | <a href="feedback.html" target="_blank">Feedback</a><b></b>
-            </p>
-
-                
-        </footer>
-    </div>
-
-    <script src="script.js"></script>
-    <script>
-    // Preventing right-click
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-        alert('Right-click is disabled.');
-    });
-
-    // Preventing F12 and Ctrl+Shift+I
-    document.addEventListener('keydown', function (e) {
-        if (
-            e.key === 'F12' || 
-            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
-            (e.ctrlKey && e.key === 'U')
-        ) {
-            e.preventDefault();
-            alert('DevTools shortcuts are disabled.');
-        }
-    });
-
-    // Detect DevTools by measuring screen resizing
-    (function () {
-        let element = new Image();
-        Object.defineProperty(element, 'id', {
-            get: function () {
-                alert('DevTools is open. Please close it to continue using this site.');
-                document.body.innerHTML = '';
-            }
-        });
-        console.log(element);
-    })();
-
-    // Check for DevTools using timing detection
-    setInterval(function () {
-        const start = performance.now();
-        debugger;
-        const end = performance.now();
-        if (end - start > 100) {
-            alert('DevTools is open! Please close it to continue.');
-            document.body.innerHTML = '';
-        }
-    }, 1000);
-
-
-    const images = [
-        { src: 'banner/discord.svg', link: 'https://discord.gg/BWKgvAZFyJ' },
-        { src: 'banner/amine.svg', link: 'https://datavorous.github.io/amine/' }
-    ];
-
-    let currentIndex = 0; // Start with the first image (Discord)
-
-    function switchBanner() {
-        currentIndex = (currentIndex + 1) % images.length; // Switch between 0 and 1
-
-        // Get the banner elements
-        const bannerImg = document.getElementById('banner-img');
-        const bannerLink = document.getElementById('banner-link');
-
-        // Update the image source and link href
-        bannerImg.src = images[currentIndex].src;
-        bannerLink.href = images[currentIndex].link;
-    }
-
-    // Call the switchBanner function every 10 seconds
-    setInterval(switchBanner, 10000);
-</script>
 </body>
 </html>
