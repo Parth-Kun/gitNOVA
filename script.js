@@ -8,6 +8,9 @@ import {
   clearSessionCache
 } from './utils.js';
 
+// Initialize from URL and session storage on page load
+const urlData = initFromURL();
+
 const API_BASE = 'https://qapi-xbw7.onrender.com/';
 let subject = '',
   chapter = '',
@@ -21,9 +24,6 @@ let isManualScroll = false;
 let scrollTimeoutId = null;
 let isDarkMode = localStorage.getItem('darkMode') === 'enabled';
 let score = 0;
-
-// Initialize from URL and session storage on page load
-const urlData = initFromURL();
 
 subject = urlData.subject;
 chapter = urlData.chapter;
@@ -46,6 +46,36 @@ function formatTime(seconds) {
     timeString += secondsRemaining + 's';
   }
   return timeString;
+}
+
+function showSubjectSkeletons() {
+  $('#subjects').html(`
+    <div class="skeleton skeleton-subject"></div>
+    <div class="skeleton skeleton-subject"></div>
+    <div class="skeleton skeleton-subject"></div>
+  `);
+}
+
+function showChapterSkeletons() {
+  $('#chapters').html(`
+    ${Array(9).fill(`<div class="skeleton skeleton-chapter"></div>`).join('')}
+  `);
+}
+
+function showTopicSkeletons() {
+  $('#topics').html(`
+    ${Array(9).fill(`<div class="skeleton skeleton-topic"></div>`).join('')}
+  `);
+}
+
+function showQuestionSkeletons() {
+  $('#question-content').html(`
+    <div class="skeleton skeleton-question"></div>
+    <div class="skeleton skeleton-option"></div>
+    <div class="skeleton skeleton-option"></div>
+    <div class="skeleton skeleton-option"></div>
+    <div class="skeleton skeleton-option"></div>
+  `);
 }
 
 // Function to start the timer
@@ -82,6 +112,7 @@ function renderContent(html) {
 // Function to fetch and render subjects
 function fetchAndRenderSubjects() {
   $('#subject-container').show();
+  showSubjectSkeletons();
   $('#subjects').html('');
 
   const subjectsData = [
@@ -125,6 +156,9 @@ function fetchAndRenderSubjects() {
 
 // Function to fetch and render chapters
 function fetchChapters() {
+  $('#subject-container').hide();
+  $('#chapter-container').show();
+  showChapterSkeletons();
   const cacheKey = `${subject}-chapters`;
 
   if (sessionCache[cacheKey]) {
@@ -139,7 +173,9 @@ function fetchChapters() {
 }
 
 function renderChapters(data) {
-  $('#chapter-container').show();
+  // $('#subject-container').hide();
+  // $('#chapter-container').show();
+  // $('#subject-container').show();
   $('#chapters').html('');
   data.chapters.forEach(ch => {
     $('#chapters').append(`
@@ -148,11 +184,14 @@ function renderChapters(data) {
              </button>
          `);
   });
-  $('#subject-container').hide();
 }
 
 // Function to fetch and render topics
 function fetchTopics() {
+  $('#subject-container').hide();
+  $('#chapter-container').hide();
+  $('#topic-container').show();
+  showTopicSkeletons();
   const cacheKey = `${subject}-${chapter}-topics`;
 
   if (sessionCache[cacheKey]) {
@@ -166,8 +205,6 @@ function fetchTopics() {
 }
 
 function renderTopics(data) {
-  $('#subject-container').hide();
-  $('#topic-container').show();
   $('#topics').html('');
   data.topics.forEach(tp => {
     $('#topics').append(`
@@ -176,7 +213,6 @@ function renderTopics(data) {
              </button>
          `);
   });
-  $('#chapter-container').hide();
 }
 
 // Function to initialize question progress
@@ -480,6 +516,11 @@ $('#submit-answer-button').click(function () {
 
 // Function to fetch questions
 function fetchQuestions() {
+  $('#subject-container').hide();
+  $('#topic-container').hide();
+  $('#question-container').show();
+  $('#question-sidebar').show();
+  showQuestionSkeletons();
   const cacheKey = `${subject}-${chapter}-${topic}-questions`;
 
   if (sessionCache[cacheKey]) {
@@ -496,6 +537,7 @@ function fetchQuestions() {
 }
 
 function renderQuestions() {
+  showQuestionSkeletons();
   $('#subject-container').hide();
   initQuestionProgress();
   $('#total-questions-number').text(questions.length);
@@ -514,8 +556,8 @@ $(document).on('click', '.subject-card', function () {
   currentQuestionIndex = 0;
     clearSessionCache();
   updateURLParams({ subject });
-  fetchChapters();
   hideQuestionContainer();
+  fetchChapters();
 });
 
 // Event Listener for chapter button clicks
@@ -541,7 +583,7 @@ $(document).on('click', '.topic', function () {
     'question-number': currentQuestionIndex + 1,
   });
   fetchQuestions();
-  hideQuestionContainer();
+  // hideQuestionContainer();
 });
 
 // Event Listener for answer option clicks
