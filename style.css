@@ -238,3 +238,8 @@
   margin-bottom: 10px;
   height: auto;
 }
+
+mjx-container mjx-math {
+  line-height: .5;
+  white-space: normal;
+}
