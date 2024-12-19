@@ -216,6 +216,7 @@
 
   .card{
     display: flow;
+    overflow-x: auto;
   }
 
   .card-error,
