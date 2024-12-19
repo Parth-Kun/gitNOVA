@@ -218,6 +218,14 @@
     display: flow;
   }
 
+  .card-error,
+  .card-success {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    line-height: 2;
+  }
+
 .option{
   padding: 10px;
   border-radius: 10px;
