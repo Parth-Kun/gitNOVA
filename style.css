@@ -163,7 +163,6 @@
       max-height: calc(100vh - 5rem);
       overflow-y: auto;
       overflow-x: hidden;
-      border-left: 1px solid #e5e7eb; /* Added a left border so it shows up as a right sidebar*/
       margin-bottom: 0;
       width: 30vw;
       /* display: block !important; */
