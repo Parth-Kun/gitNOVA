@@ -181,6 +181,13 @@
     #question-list-container {
       flex-wrap: wrap;
     }
+
+    /* make answer option in grid for pc in 2x2 */
+    .answer-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
   }
   
   .subject-card {
@@ -206,3 +213,19 @@
     width: 40px;
     height: 40px;
   }
+
+  .card{
+    display: flow;
+  }
+
+.option{
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  text-align: left;
+  font-size: 1.1em;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  height: fit-content;
+}
