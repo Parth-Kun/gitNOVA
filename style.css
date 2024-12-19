@@ -125,7 +125,6 @@
     .app-container {
       display: grid;
       grid-template-columns: 4fr 1fr; /* Main content takes up 4/5 of the width and the sidebar takes up 1/5*/
-      gap: 20px;
     }
   
     #question-sidebar {
@@ -282,3 +281,4 @@ mjx-container mjx-math {
   border-top: 3px solid;
   border-right: 3px solid;
 }
+
