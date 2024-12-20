@@ -231,15 +231,30 @@ function fetchChapters() {
   });
 }
 
+// function renderChapters(data) {
+//   $chapters.html('');
+//   data.chapters.forEach(ch => {
+//     // make this again make it better and looking amazing and now add on more data in it questionCount for each and that data come from ch.questionCount
+//     $chapters.append(`
+//              <button class='btn font-bold capitalize chapter ' data-chapter='${ch.name}'>
+//                  ${ch.name.replace(/-/g, ' ')}
+//              </button>
+//          `);
+//   });
+// }
+
 function renderChapters(data) {
-  $chapters.html('');
+  $chapters.html(''); // Clear the existing content
+
   data.chapters.forEach(ch => {
-    // make this again make it better and looking amazing and now add on more data in it questionCount for each and that data come from ch.questionCount
     $chapters.append(`
-             <button class='btn font-bold capitalize chapter ' data-chapter='${ch.name}'>
-                 ${ch.name.replace(/-/g, ' ')}
-             </button>
-         `);
+        <button class="btn chapter w-100 p-3 rounded-2xl shadow-sm transform duration-500 hover:scale-105" data-chapter='${ch.name}'>
+          <div class="d-flex justify-content-center align-items-center">
+            <p class="mb-0 font-weight-bold chapter-title font-bold capitalize chapter">${ch.name.replace(/-/g, ' ')}</p>
+            <p class="mb-0 text-muted question-count font-sm">${ch.questionCount} Qs</p>
+          </div>
+        </button>
+    `);
   });
 }
 
@@ -261,13 +276,17 @@ function fetchTopics() {
 }
 
 function renderTopics(data) {
-  $topics.html('');
+  $topics.html(''); // Clear the existing content (assuming $topics exists)
+
   data.topics.forEach(tp => {
     $topics.append(`
-             <button class='btn font-bold capitalize topic ' data-topic='${tp.name}'>
-                 ${tp.name.replace(/-/g, ' ')}
-             </button>
-         `);
+        <button class="btn topic w-100 p-3 rounded-2xl shadow-sm transform duration-500 hover:scale-105" data-topic='${tp.name}'>
+          <div class="d-flex justify-content-center align-items-center">
+            <p class="mb-0 font-weight-bold topic-title font-bold capitalize">${tp.name.replace(/-/g, ' ')}</p>
+            <p class="mb-0 text-muted question-count font-sm">${tp.questionCount} Qs</p>
+          </div>
+        </button>
+    `);
   });
 }
 
