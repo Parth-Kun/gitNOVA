@@ -234,6 +234,7 @@ function fetchChapters() {
 function renderChapters(data) {
   $chapters.html('');
   data.chapters.forEach(ch => {
+    // make this again make it better and looking amazing and now add on more data in it questionCount for each and that data come from ch.questionCount
     $chapters.append(`
              <button class='btn font-bold capitalize chapter ' data-chapter='${ch.name}'>
                  ${ch.name.replace(/-/g, ' ')}

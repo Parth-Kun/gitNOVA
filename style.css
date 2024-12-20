@@ -48,6 +48,10 @@
   }
 }
 
+.btn {
+  height: auto !important;
+}
+
 
 .theme-toggle {
   background: transparent;
