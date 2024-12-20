@@ -248,7 +248,7 @@ function renderChapters(data) {
 
   data.chapters.forEach(ch => {
     $chapters.append(`
-        <button class="btn chapter w-100 p-3 rounded-2xl shadow-sm transform duration-500 hover:scale-105" data-chapter='${ch.name}'>
+        <button class="btn chapter w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-chapter='${ch.name}'>
           <div class="d-flex justify-content-center align-items-center">
             <p class="mb-0 font-weight-bold chapter-title font-bold capitalize chapter">${ch.name.replace(/-/g, ' ')}</p>
             <p class="mb-0 text-muted question-count font-sm">${ch.questionCount} Qs</p>
@@ -280,7 +280,7 @@ function renderTopics(data) {
 
   data.topics.forEach(tp => {
     $topics.append(`
-        <button class="btn topic w-100 p-3 rounded-2xl shadow-sm transform duration-500 hover:scale-105" data-topic='${tp.name}'>
+        <button class="btn topic w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-topic='${tp.name}'>
           <div class="d-flex justify-content-center align-items-center">
             <p class="mb-0 font-weight-bold topic-title font-bold capitalize">${tp.name.replace(/-/g, ' ')}</p>
             <p class="mb-0 text-muted question-count font-sm">${tp.questionCount} Qs</p>
