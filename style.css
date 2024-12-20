@@ -2,6 +2,53 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) { /* Adjust the max-width as needed for your mobile breakpoint */
+  .p-6 {
+    padding: 1rem !important;
+  }
+  .p-5 {
+    padding: 0.75rem !important;
+  }
+  .p-4 {
+    padding: 0.5rem !important;
+  }
+  .option {
+    padding: 0 !important;
+  }
+  aside {
+    margin-bottom: 0 !important;
+  }
+  .border {
+    border: 0 !important;
+  }
+  .feedback {
+    padding: 7.5px !important;
+  }
+  .app-container {
+      padding: 0 !important; /* Use !important if you want to override other styles */
+  }
+  #breadcrumb-topic:hover, #breadcrumb-chapter:hover, #breadcrumb-subject:hover {
+    transform: scale(1.05); /* Set hover scale to 1.05 for mobile devices */
+  }
+  .navigation-buttons {
+    margin: 1.25rem !important;
+  }
+  header, section, .rounded-xl {
+    border-radius: 0 !important;
+  }
+  h2 {
+    white-space: nowrap; /* Prevents the heading from wrapping to the next line */
+    overflow: visible; /* Ensures overflow is visible */
+    font-size: calc(1rem + 2vw); /* Responsive font size that adjusts based on viewport width */
+    width: 100%; /* Ensures the heading takes the full width of the container */
+    display: inline-block; /* Allows the heading to resize without wrapping */
+  }
+  #question-list-container {
+    margin-left: 0.5rem;
+  }
+}
+
+
 .theme-toggle {
   background: transparent;
   border: none;
@@ -281,3 +328,4 @@ mjx-container mjx-math {
   border-top: 2px solid;
   border-right: 2px solid;
 }
+

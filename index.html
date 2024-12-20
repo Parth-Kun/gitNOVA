@@ -17,7 +17,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' https: 'unsafe-inline'; style-src 'self' https: 'unsafe-inline';">
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    <title>Novatra App</title>
+    <title>ηovatra App</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0-alpha.51/daisyui.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -71,7 +71,7 @@
     <div class="app-container max-w-screen-lg mx-auto p-5 flex flex-col min-h-screen transition-colors duration-150">
       <header class="page-header flex justify-between items-center py-4 px-5 bg-primary-100 border-b-2 border-primary-400 rounded-xl shadow-md transition-colors duration-150 dark:bg-gray-800 dark:border-gray-700">
         <div class="header-content flex items-center gap-4">
-          <h1 id="page-title" class="text-2xl font-semibold text-primary-900 transition-colors duration-150 dark:text-gray-100"> ηovatra </h1>
+          <h1 id="page-title" class="text-2xl font-semibold text-primary-900 transition-colors duration-150 dark:text-gray-100">ηovatra</h1>
         </div>
         <button id="dark-mode-toggle" class="theme-toggle text-2xl cursor-pointer text-primary-900 transition-transform duration-200 hover:scale-110 dark:text-gray-100" aria-label="Toggle dark mode">
           <i class="fas fa-moon"></i>
@@ -110,7 +110,7 @@
         <div class="content-area flex-grow">
           <section id="subject-container" style="display: none" class="selection-container card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mb-6 transition-colors duration-150 dark:bg-gray-800 dark:border-gray-700">
             <div id="image-container" class="flex justify-center items-center mb-5">
-              <img id="image" class="shadow-md transition-transform duration-300 flex items-center justify-between cursor-pointer" src="https://raw.githubusercontent.com/KingNish24/assets/refs/heads/ui-enhancement/banner/discord.svg" alt="Discord" onclick="window.open('https://discord.gg/BWKgvAZFyJ', '_blank')">
+              <img id="image" class="shadow-md transition-transform duration-300 flex items-center justify-between cursor-pointer" src="banner/discord.svg" alt="Discord" onclick="window.open('https://discord.gg/BWKgvAZFyJ', '_blank')">
             </div>
 
             <h2 class="section-title text-3xl font-semibold text-primary-900 mb-5 transition-colors duration-150 dark:text-gray-100"> JEE Mains PYQs <span class="topic-tag text-primary-500 ml-1 text-sm transition-colors duration-150 dark:text-primary-400">TOPIC-WISE</span>
@@ -137,7 +137,7 @@
           </section>
           <section id="question-container" style="display: none">
             <div id="paper-title-container">
-              <p id="paper-title" class="font-semibold text-primary-500 mb-4 transition-colors duration-150 dark:text-primary-400"></p>
+              <p id="paper-title" class="font-semibold text-primary-500 mb-4 ml-4 transition-colors duration-150 dark:text-primary-400"></p>
             </div>
             <div class="question-header card bg-base-100 p-5 rounded-xl shadow-md border border-gray-300 transition-colors duration-150 dark:bg-gray-800 dark:border-gray-700">
               <div class="timer-container flex justify-between items-center text-lg">
@@ -181,7 +181,7 @@
       </footer>
     </div>
     <script defer src="script.js" type="module"></script>
-        <script>
+        <!-- <script>
     // Preventing right-click
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
@@ -229,6 +229,6 @@
             document.body.innerHTML = '';
         }
     }, 1000);
-</script>
+</script> -->
   </body>
 </html>

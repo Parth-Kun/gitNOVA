@@ -201,7 +201,7 @@ function fetchAndRenderSubjects() {
 
   subjectsData.forEach(sub => {
     $subjects.append(`
-          <div class="subject-card bg-${sub.color}-200 text-gray-800 p-7 rounded-xl shadow-md transition-transform duration-300 flex items-center justify-between cursor-pointer hover:scale-105" data-subject="${sub.name}">
+          <div class="subject-card bg-${sub.color}-200 text-gray-800 p-7 rounded-2xl shadow-md transition-transform duration-300 flex items-center justify-between cursor-pointer hover:scale-105" data-subject="${sub.name}">
             <div>
               <h4 class="text-xl font-bold mb-2 capitalize">${sub.name} <i class="fas fa-angle-right"></i></h4>
               <p class="text-sm">${sub.chapters} Chapters, ${sub.questions} Qs</p>
