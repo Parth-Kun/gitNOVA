@@ -92,18 +92,18 @@ img:hover {
 }
 
 .option.selected {
-  border-color: #bb00ff;
-  color: #bb00ff;
+  border-color: #bb00ff !important;
+  color: #bb00ff !important;
 }
 
 .option.correct {
-  color: #38a53d;
-  border-color: #38a53d;
+  color: #38a53d !important;
+  border-color: #38a53d !important;
 }
 
 .option.incorrect {
-  border-color: #b71c1c;
-  color: #b71c1c;
+  border-color: #b71c1c !important;
+  color: #b71c1c !important;
 }
 
 #integer-input-container {

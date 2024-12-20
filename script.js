@@ -351,7 +351,7 @@ function updateQuestionListUI() {
             ${questionProgress
             .map(
               q => `
-                 <div class="question-item btn font-bold  capitalize ${q.answered
+                 <div class="question-item btn font-bold dark:border-slate-700  capitalize ${q.answered
                 ? q.correct
                   ? 'btn-success text-white text'
                   : 'btn-error text-white'
@@ -439,7 +439,7 @@ function renderQuestion() {
       .map(opt => {
         const renderedContent = renderContent(opt.content);
         return `
-                <button class='btn font-bold option' data-identifier='${opt.identifier}'>
+                <button class='btn font-bold option dark:border-slate-700' data-identifier='${opt.identifier}'>
                     ${renderedContent}
                 </button>
             `;
