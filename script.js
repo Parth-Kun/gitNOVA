@@ -235,8 +235,8 @@ function renderChapters(data) {
   $chapters.html('');
   data.chapters.forEach(ch => {
     $chapters.append(`
-             <button class='btn font-bold capitalize chapter ' data-chapter='${ch}'>
-                 ${ch.replace(/-/g, ' ')}
+             <button class='btn font-bold capitalize chapter ' data-chapter='${ch.name}'>
+                 ${ch.name.replace(/-/g, ' ')}
              </button>
          `);
   });
@@ -263,8 +263,8 @@ function renderTopics(data) {
   $topics.html('');
   data.topics.forEach(tp => {
     $topics.append(`
-             <button class='btn font-bold capitalize topic ' data-topic='${tp}'>
-                 ${tp.replace(/-/g, ' ')}
+             <button class='btn font-bold capitalize topic ' data-topic='${tp.name}'>
+                 ${tp.name.replace(/-/g, ' ')}
              </button>
          `);
   });
