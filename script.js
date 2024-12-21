@@ -280,7 +280,7 @@ function renderTopics(data) {
 
   data.topics.forEach(tp => {
     $topics.append(`
-        <button class="btn topic w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-topic='${tp.name}'>
+        <button class="btn topic w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-topic="${tp.name}">
           <div class="d-flex justify-content-center align-items-center">
             <p class="mb-0 font-weight-bold topic-title font-bold capitalize">${tp.name.replace(/-/g, ' ')}</p>
             <p class="mb-0 text-muted question-count font-sm">${tp.questionCount} Qs</p>
