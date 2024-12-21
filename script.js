@@ -231,24 +231,12 @@ function fetchChapters() {
   });
 }
 
-// function renderChapters(data) {
-//   $chapters.html('');
-//   data.chapters.forEach(ch => {
-//     // make this again make it better and looking amazing and now add on more data in it questionCount for each and that data come from ch.questionCount
-//     $chapters.append(`
-//              <button class='btn font-bold capitalize chapter ' data-chapter='${ch.name}'>
-//                  ${ch.name.replace(/-/g, ' ')}
-//              </button>
-//          `);
-//   });
-// }
-
 function renderChapters(data) {
   $chapters.html(''); // Clear the existing content
 
   data.chapters.forEach(ch => {
     $chapters.append(`
-        <button class="btn chapter w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-chapter='${ch.name}'>
+        <button class="btn chapter w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-chapter="${ch.name}">
           <div class="d-flex justify-content-center align-items-center">
             <p class="mb-0 font-weight-bold chapter-title font-bold capitalize chapter">${ch.name.replace(/-/g, ' ')}</p>
             <p class="mb-0 text-muted question-count font-sm">${ch.questionCount} Qs</p>
@@ -439,7 +427,7 @@ function renderQuestion() {
       .map(opt => {
         const renderedContent = renderContent(opt.content);
         return `
-                <button class='btn font-bold option dark:border-slate-700' data-identifier='${opt.identifier}'>
+                <button class='btn font-bold option dark:border-slate-700' data-identifier="${opt.identifier}">
                     ${renderedContent}
                 </button>
             `;
