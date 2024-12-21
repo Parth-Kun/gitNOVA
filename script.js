@@ -435,7 +435,7 @@ function renderQuestion() {
       .map(opt => {
         const renderedContent = renderContent(opt.content);
         return `
-                <button class='btn font-bold option dark:border-slate-700 hover:scale-[1.01] active:scale-[0.99]' data-identifier="${opt.identifier}">
+                <button class='btn font option dark:border-slate-700 hover:scale-[1.01] active:scale-[0.99]' data-identifier="${opt.identifier}">
                     ${renderedContent}
                 </button>
             `;
