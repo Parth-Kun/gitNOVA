@@ -12,6 +12,14 @@
   padding-left: 20px !important;
 }
 
+#bookmark-button {
+  padding-inline: 0.75rem !important;
+}
+
+.timer-container i {
+  font-size: large;
+}
+
 @media (max-width: 768px) { /* Adjust the max-width as needed for your mobile breakpoint */
   .p-6 {
     padding: 1rem !important;
@@ -52,6 +60,9 @@
   }
   #question-list-container {
     margin-left: 0.5rem;
+  }
+  .bookmark-text {
+    display: none;
   }
 }
 

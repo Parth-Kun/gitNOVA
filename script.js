@@ -802,9 +802,9 @@ window.addEventListener('urlchanged', () => {
 // --- Bookmark Functionality ---
 function updateBookmarkButtonUI(isBookmarked) {
   if (isBookmarked) {
-    $bookmarkButton.html('<i class="fas fa-bookmark text-yellow-500"></i> Unbookmark');
+    $bookmarkButton.html('<i class="fas fa-bookmark text-yellow-500"></i><p class="bookmark-text"> Unbookmark</p>');
   } else {
-    $bookmarkButton.html('<i class="far fa-bookmark"></i> Bookmark');
+    $bookmarkButton.html('<i class="far fa-bookmark"></i><p class="bookmark-text"> Bookmark</p>');
   }
 }
 
