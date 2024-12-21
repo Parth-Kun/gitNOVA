@@ -241,7 +241,7 @@ function renderChapters(data) {
         <button class="btn chapter w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-chapter="${ch.name}">
           <div class="d-flex justify-content-center align-items-center">
             <p class="mb-0 font-weight-bold chapter-title font-bold capitalize chapter">${ch.name.replace(/-/g, ' ')}</p>
-            <p class="mb-0 text-muted question-count font-sm">${ch.questionCount} Qs</p>
+            <p class="mb-0 text-muted question-count text-[0.7rem]">${ch.questionCount} Qs</p>
           </div>
         </button>
     `);
@@ -273,7 +273,7 @@ function renderTopics(data) {
         <button class="btn topic w-100 p-3 rounded-2xl shadow-sm transition-transform duration-300 hover:scale-105 dark:border-slate-700" data-topic="${tp.name}">
           <div class="d-flex justify-content-center align-items-center">
             <p class="mb-0 font-weight-bold topic-title font-bold capitalize">${tp.name.replace(/-/g, ' ')}</p>
-            <p class="mb-0 text-muted question-count font-sm">${tp.questionCount} Qs</p>
+            <p class="mb-0 text-muted question-count text-[0.7rem]">${tp.questionCount} Qs</p>
           </div>
         </button>
     `);
@@ -667,11 +667,18 @@ $nextQuestionButton.click(function () {
 });
 
 $backToSubjects.click(function () {
+  fetchAndRenderSubjects();
+  updateURLParams({});
+  hideQuestionContainer();
   $chapterContainer.hide();
+  $topicContainer.hide();
   $subjectContainer.show();
 });
 
 $backToChapters.click(function () {
+  updateURLParams({ subject });
+  fetchChapters();
+  hideQuestionContainer();
   $topicContainer.hide();
   $chapterContainer.show();
 });
