@@ -2,14 +2,14 @@
 
 const sessionCache = {};
 
-function getSessionCache(){
-    return sessionCache;
+function getSessionCache() {
+  return sessionCache;
 }
 
-function clearSessionCache(){
-    for (let key in sessionCache) {
-        delete sessionCache[key];
-    }
+function clearSessionCache() {
+  for (let key in sessionCache) {
+    delete sessionCache[key];
+  }
 }
 
 // Function to update URL params
@@ -40,27 +40,35 @@ function initFromURL() {
   const topic = urlParams.get('topic') || '';
   const questionNumber = parseInt(urlParams.get('question-number')) || 1;
 
-    // Return all extracted params
-    return {
-        subject: subject,
-        chapter: chapter,
-        topic: topic,
-        questionNumber: questionNumber
-    }
+  // Return all extracted params
+  return {
+    subject: subject,
+    chapter: chapter,
+    topic: topic,
+    questionNumber: questionNumber,
+  };
 }
 
 // Function to save data in session storage
-function saveSessionStorageData(subject,chapter,topic,questionProgress) {
-    const key = `${subject}-${chapter}-${topic}`;
-    const data = JSON.stringify(questionProgress);
-    sessionStorage.setItem(key, data);
+function savelocalStorageData(subject, chapter, topic, questionProgress) {
+  const key = `${subject}-${chapter}-${topic}`;
+  const data = JSON.stringify(questionProgress);
+  localStorage.setItem(key, data);
 }
 
 // Function to get data from session storage
-function getSessionStorageData(subject,chapter,topic) {
-    const key = `${subject}-${chapter}-${topic}`;
-    const data = sessionStorage.getItem(key);
-    return data ? JSON.parse(data) : null;
+function getlocalStorageData(subject, chapter, topic) {
+  const key = `${subject}-${chapter}-${topic}`;
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
 }
 
-export { updateURLParams, initFromURL, saveSessionStorageData, getSessionStorageData, sessionCache, getSessionCache, clearSessionCache };
+export {
+  updateURLParams,
+  initFromURL,
+  savelocalStorageData,
+  getlocalStorageData,
+  sessionCache,
+  getSessionCache,
+  clearSessionCache,
+};

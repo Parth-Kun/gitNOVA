@@ -2,8 +2,8 @@
 import {
   updateURLParams,
   initFromURL,
-  saveSessionStorageData,
-  getSessionStorageData,
+  savelocalStorageData,
+  getlocalStorageData,
   sessionCache,
   clearSessionCache,
 } from './utils.js';
@@ -49,6 +49,7 @@ const $breadcrumbHome = $('#breadcrumb-home');
 const $backToSubjects = $('#back-to-subjects');
 const $backToChapters = $('#back-to-chapters');
 const $imageContainer = $('#image-container');
+const $bookmarkButton = $('#bookmark-button');
 
 // State variables
 let subject = '';
@@ -63,6 +64,7 @@ let isManualScroll = false;
 let scrollTimeoutId = null;
 let isDarkMode = localStorage.getItem('darkMode') === 'enabled';
 let score = 0;
+let bookmarkedQuestions = []; // Not used anymore
 
 // Initialize from URL and session storage on page load
 const urlData = initFromURL();
@@ -322,9 +324,10 @@ function initQuestionProgress() {
     type: q.type,
     userAnswer: null,
     viewed: false,
+    bookmarked: false,
   }));
 
-  const savedProgress = getSessionStorageData(subject, chapter, topic);
+  const savedProgress = getlocalStorageData(subject, chapter, topic);
   if (savedProgress) {
     questionProgress = savedProgress;
     score = questionProgress.reduce((sum, q) => (q.correct ? sum + 1 : sum), 0);
@@ -335,26 +338,30 @@ function initQuestionProgress() {
 
 function updateQuestionListUI() {
   const questionList = $(`
-        <div id="question-list-container" class="flex flex-nowrap">
-            ${questionProgress
-            .map(
-              q => `
-                 <div class="question-item btn font-bold dark:border-slate-700  capitalize ${q.answered
+    <div id="question-list-container" class="flex flex-nowrap">
+        ${questionProgress
+        .map(
+            q => `
+             <div class="question-item btn font-bold dark:border-slate-700  capitalize ${q.answered
                 ? q.correct
-                  ? 'btn-success text-white text'
-                  : 'btn-error text-white'
+                    ? 'btn-success text-white'
+                    : 'btn-error text-white'
                 : q.viewed
-                  ? 'btn-info text-white'
-                  : 'border-black text'
-              }" data-index="${q.index}">
-                    Q${q.index + 1}
-                    ${q.answered
-                ? q.correct
-                  ? '<i class="fas fa-check"></i>'
-                  : '<i class="fas fa-times"></i>'
-                : ''
-              }
-                  </div>
+                    ? 'btn-info text-white'
+                    : 'border-black text'
+                }" data-index="${q.index}">
+                Q${q.index + 1}
+                ${q.answered
+                    ? q.correct
+                        ? '<i class="fas fa-check"></i>'
+                        : '<i class="fas fa-times"></i>'
+                    : ''}
+                ${
+                    q.bookmarked
+                        ? '<i class="fas fa-bookmark text-yellow-500"></i>'
+                        : ''
+                    }
+              </div>
               `
             )
             .join('')}
@@ -401,6 +408,7 @@ function updateQuestionListUI() {
     const itemTop = currentQuestionItem.position().top;
     const newScrollTop = itemTop - (containerHeight - itemHeight) / 2;
     if (Math.abs(currentScrollTop - newScrollTop) > 10) {
+      // Additional logic can be added here if needed
     }
   });
 
@@ -483,6 +491,7 @@ function renderQuestion() {
 
   questionProgress[currentQuestionIndex].viewed = true;
   updateQuestionListUI();
+  updateBookmarkButtonUI(questionProgress[currentQuestionIndex].bookmarked);
 
   startTimer();
   renderMathJax();
@@ -582,7 +591,7 @@ $submitAnswerButton.click(function () {
     $resetQuizButton.show();
   }
 
-  saveSessionStorageData(subject, chapter, topic, questionProgress);
+  savelocalStorageData(subject, chapter, topic, questionProgress);
 
   renderMathJax();
 });
@@ -789,3 +798,20 @@ $resetQuizButton.click(function () {
 window.addEventListener('urlchanged', () => {
   updateBreadcrumb();
 });
+
+// --- Bookmark Functionality ---
+function updateBookmarkButtonUI(isBookmarked) {
+  if (isBookmarked) {
+    $bookmarkButton.html('<i class="fas fa-bookmark text-yellow-500"></i> Unbookmark');
+  } else {
+    $bookmarkButton.html('<i class="far fa-bookmark"></i> Bookmark');
+  }
+}
+
+$bookmarkButton.click(function () {
+    const index = currentQuestionIndex;
+    questionProgress[index].bookmarked = !questionProgress[index].bookmarked;
+    savelocalStorageData(subject, chapter, topic, questionProgress);
+    updateQuestionListUI();
+    updateBookmarkButtonUI(questionProgress[index].bookmarked);
+  });

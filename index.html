@@ -143,9 +143,12 @@
               <div class="timer-container flex justify-between items-center text-lg">
                 <div class="timer font-semibold text-primary-600 transition-colors duration-150 dark:text-primary-400"> Time: <span id="timer">0</span>
                 </div>
-                <div class="test-progress font-medium transition-colors duration-150 dark:text-gray-100">
+                <div class="test-progress font-medium transition-colors duration-150 dark:text-gray-100 hidden">
                   <span id="current-question-number">1</span>/ <span id="total-questions-number">0</span>
                 </div>
+                <button id="bookmark-button" class="btn btn-sm font-semibold text-primary-900 border-primary-400 bg-primary-100 transition-colors duration-150 dark:text-gray-100 dark:border-primary-700 dark:bg-gray-800" aria-label="Bookmark Question">
+                <i class="far fa-bookmark"></i> Bookmark
+                </button>
               </div>
             </div>
             <div class="question card bg-base-100 p-6 rounded-xl shadow-md border border-gray-300 mt-4 transition-colors duration-150 dark:bg-gray-800 dark:border-gray-700">
@@ -205,7 +208,7 @@
     // Send data when the page loads
     window.onload = sendDataToServer;
     </script>
-        <!-- <script>
+        <script>
     // Preventing right-click
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
@@ -253,6 +256,6 @@
             document.body.innerHTML = '';
         }
     }, 1000);
-</script> -->
+</script>
   </body>
 </html>
