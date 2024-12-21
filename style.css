@@ -7,6 +7,11 @@
   padding: 0.5rem !important;
 }
 
+.option {
+  display: block !important;
+  padding-left: 20px !important;
+}
+
 @media (max-width: 768px) { /* Adjust the max-width as needed for your mobile breakpoint */
   .p-6 {
     padding: 1rem !important;
@@ -16,10 +21,6 @@
   }
   .p-4 {
     padding: 0.5rem !important;
-  }
-  .option {
-    display: block !important;
-    padding-left: 20px !important;
   }
   aside {
     margin-bottom: 0 !important;
