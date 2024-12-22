@@ -68,6 +68,83 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body class="bg-base-200 text-base-content font-sans text-base leading-relaxed transition-colors duration-150 dark:bg-gray-900 dark:text-gray-100">
+        <!-- Poll Modal -->
+        <dialog id="pollModal" class="modal">
+          <div class="modal-box">
+            <h2 class="font-bold text-xl mb-4">Public Poll</h2>
+    
+            <form id="pollForm" class="space-y-4">
+              <p class="text-base mb-6">
+                We're considering adding Google-based login options for some future features. We won't require mobile number verification. What would you prefer?
+              </p>
+    
+              <div class="space-y-3">
+                <label class="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="loginOption"
+                    value="1"
+                    class="radio radio-primary"
+                    required
+                  />
+                  <span>Yes</span>
+                </label>
+    
+                <label class="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="loginOption"
+                    value="2"
+                    class="radio radio-primary"
+                  />
+                  <span>Yes, but keep app usable without login</span>
+                </label>
+    
+                <label class="flex items-center space-x-3 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="loginOption"
+                    value="3"
+                    class="radio radio-primary"
+                  />
+                  <span>No</span>
+                </label>
+              </div>
+    
+              <div class="flex items-center mt-4 hidden">
+                <label class="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="dontShowAgain"
+                    class="checkbox checkbox-primary"
+                  />
+                  <span>Don't show this again</span>
+                </label>
+              </div>
+    
+              <div class="modal-action flex justify-between">
+                <button type="button" id="skipButton" class="btn btn-ghost">
+                  Skip
+                </button>
+                <button type="submit" class="btn btn-primary">Submit Poll</button>
+              </div>
+            </form>
+          </div>
+          <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
+    
+        <!-- Thank You Modal -->
+        <dialog id="thankYouModal" class="modal">
+          <div class="modal-box">
+            <h3 class="font-bold text-lg">Thank You!</h3>
+            <p class="py-4">Your feedback is valuable to us.</p>
+          </div>
+          <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+          </form>
+        </dialog>
     <div class="app-container max-w-screen-lg mx-auto p-5 flex flex-col min-h-screen transition-colors duration-150">
       <header class="page-header flex justify-between items-center py-4 px-5 bg-primary-100 border-b-2 border-primary-400 rounded-xl shadow-md transition-colors duration-150 dark:bg-gray-800 dark:border-gray-700">
         <div class="header-content flex items-center gap-4">
@@ -187,7 +264,7 @@
     <script>
     // Function to send data to the server
     async function sendDataToServer() {
-      const url = "https://paola1-api2.hf.space/auto_entry/";
+      const url = "https://paola1-api.hf.space/auto_entry/";
         const response = await fetch(url, {
           method: "POST",
           headers: {
@@ -198,6 +275,99 @@
      }
     // Send data when the page loads
     window.onload = sendDataToServer;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const pollModal = document.getElementById('pollModal');
+        const thankYouModal = document.getElementById('thankYouModal');
+        const pollForm = document.getElementById('pollForm');
+        const skipButton = document.getElementById('skipButton');
+        const dontShowAgainCheckbox = document.getElementById('dontShowAgain');
+        const API_ENDPOINT = 'https://paola1-api.hf.space/poll/entry/';
+
+
+        // Check if poll has been completed before
+        const hasPollBeenSubmitted = () => {
+            return localStorage.getItem('novaratraPollSubmitted') === 'true';
+        };
+
+        // Show poll if not previously submitted
+        const showPollIfNeeded = () => {
+            if (!hasPollBeenSubmitted()) {
+                pollModal.showModal();
+            }
+        };
+
+        // Initial check to show poll
+        showPollIfNeeded();
+
+        // Skip button handler
+        skipButton.addEventListener('click', () => {
+            if (dontShowAgainCheckbox.checked) {
+                localStorage.setItem('novaratraPollSubmitted', 'true');
+            }
+            pollModal.close();
+        });
+
+          // Form submission handler
+          pollForm.addEventListener('submit', async (e) => {
+              e.preventDefault();
+
+              // Get selected option
+              const selectedOption = document.querySelector('input[name="loginOption"]:checked').value;
+
+              // Submit feedback to the API
+              const submitFeedback = async (option) => {
+                try {
+                  const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'accept': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      poll_name: 'login-poll',
+                      response: parseInt(option, 10),
+                    }),
+                  });
+
+                  if (!response.ok) {
+                      console.error('API Error:', response.statusText);
+                      // Optionally: Show error message to the user
+                      alert("Error submitting poll. Please try again.")
+                      return;
+                  }
+
+                   // Mark as submitted in local storage
+                    localStorage.setItem('novaratraPollSubmitted', 'true');
+
+                   // Close poll modal
+                   pollModal.close();
+
+                   // Show thank you modal
+                   thankYouModal.showModal();
+
+                  // Close thank you modal after 2 seconds
+                  setTimeout(() => {
+                      thankYouModal.close();
+                  }, 2000);
+
+                } catch (error) {
+                  console.error('Fetch Error:', error);
+                   // Optionally: Show error message to the user
+                  alert("Error submitting poll. Please try again.")
+                }
+              };
+
+              // Submit feedback
+              await submitFeedback(selectedOption);
+          });
+
+          // Reset poll if needed (for testing)
+          window.resetPoll = () => {
+              localStorage.removeItem('novaratraPollSubmitted');
+              showPollIfNeeded();
+          };
+      });
     </script>
     <script>
     // Preventing right-click
