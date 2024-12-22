@@ -185,30 +185,21 @@
     </div>
     <script defer src="script.js" type="module"></script>
     <script>
-    // Function to determine device type based on screen width
-    function getDeviceType() {
-      return window.innerWidth < 768 ? "phone" : window.innerWidth < 1024 ? "tablet" : "desktop";
-    }
     // Function to send data to the server
     async function sendDataToServer() {
-      const url = "https://paola1-api.hf.space/auto_entry/";
-      const deviceType = getDeviceType();
-      const data = {
-        device_type: deviceType
-      };
+      const url = "https://paola1-api2.hf.space/auto_entry/";
         const response = await fetch(url, {
           method: "POST",
           headers: {
             "accept": "application/json",
             "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
+          }
         });
      }
     // Send data when the page loads
     window.onload = sendDataToServer;
     </script>
-        <script>
+    <script>
     // Preventing right-click
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
